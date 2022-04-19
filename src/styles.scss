@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+}
+
+.desktop-view {
+    @media (min-width: 700px) {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.mobile-view {
+    @media (max-width: 700px) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+h1 {
+    margin-bottom: 0 !important;
+}
+
+p {
+    margin-top: 4px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.align-items-start {
+    display: flex;
+    align-items: flex-start !important;
+}

@@ -1,0 +1,13 @@
+<div class="sidenav-container">
+    <img class="logo" src="./assets/img/logo.png">
+
+    <ul class="nav-links">
+        <li routerLink="/board" [class.active]="isActive('/board')">Board</li>
+        <li routerLink="/backlog" [class.active]="isActive('/backlog')">Backlog</li>
+        <li routerLink="/addtask" [class.active]="isActive('/addtask')">Add Task</li>
+        <li>Help</li>
+    </ul>
+
+    <img class="logged-in-user-profile" src="./assets/img/logo.png">
+
+</div>

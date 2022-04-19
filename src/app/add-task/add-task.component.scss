@@ -1,0 +1,153 @@
+.addTask-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: calc(100vw - 200px);
+    height: 100vh;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+    padding-top: 32px;
+}
+
+table {
+    margin-top: 16px;
+    font-size: 20px;
+    color: blue;
+    background-color: rgba(0, 0, 255, 0.1);
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 48px 16px;
+    padding-top: 16px;
+    padding-bottom: 32px;
+}
+
+input,
+select,
+textarea {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input, select {
+    height: 50px;
+}
+
+.assignedTo-container {
+    display: flex;
+    height: 150px;
+    width: 100%;
+    flex-direction: row;
+    overflow-x:scroll;
+    overflow-y: hidden;
+}
+
+.container-checkbox {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    background: white;
+    margin-bottom: 0.75rem;
+    margin-right: 0.75rem;
+    color: grey;
+    box-sizing: border-box;
+    &:active {
+        transform: scale(0.9);
+    }
+    input {
+        display: none;
+        &:checked + label {
+            opacity: 1;
+            box-shadow: 0 0 0 3px var(--background);
+            color: blue;
+            
+            img {
+                -webkit-filter: none; /* Safari 6.0 - 9.0 */
+                filter: none;
+                object-fit: cover;
+            }
+        }
+    }
+    label {
+        cursor: pointer;
+        overflow: hidden;
+        width: 80px;
+        height: 80px;
+        position: relative;
+        opacity: 0.6;
+        box-sizing: border-box;
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 100%;
+            -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+            filter: grayscale(100%);
+        }
+
+        .info {
+            text-align: center;
+            margin-top: 0.2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.addUser-btn {
+    height: 80px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: transparent;
+    border: none;
+
+    img {
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+    }
+}
+
+form {
+    position: relative;
+}
+
+textarea {
+    height: 200px;
+}
+
+.btn-container {
+    position: absolute;
+    bottom: 50px;
+    right: 48px;
+    display: flex;
+    align-items: center;
+
+    button {
+        width: 60px;
+        height: 40px;
+        padding: 0;
+        margin-right: 40px;
+        color: blue;
+    }
+
+    input {
+        width: 120px;
+        height: 40px;
+        border-radius: 8px;
+        color: white;
+        outline: none;
+        border: transparent;
+        background-color: blue;
+        cursor: pointer;
+
+        &:disabled {
+            background-color: grey;
+            cursor: unset;
+        }
+    }
+}
+

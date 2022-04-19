@@ -1,0 +1,30 @@
+.board-container {
+    display: flex;
+    flex-direction: row;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: calc(100vw - 200px);
+    height: 100vh;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.field-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 100%;
+    text-align: center;
+
+    h2 {
+        font-size: 20px;
+    }
+}
+
+.board-field {
+    height: 80vh;
+    background-color: rgba(0,0,255,0.2);
+}

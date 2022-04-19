@@ -1,0 +1,49 @@
+.sidenav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200px;
+    height: 100vh;
+    position: relative;
+    background-color: blue;
+    color: white;
+}
+
+.logo {
+    position: absolute;
+    height: 71px;
+    width: 60px;
+    top: 30px;
+    left: 70px;
+}
+
+.nav-links {
+    list-style-type: none;
+    font-size: 24px;
+    padding: 0;
+
+    li {
+        padding-left: 40px;
+        margin-bottom: 16px;
+        border-left: 8px solid transparent;
+
+        &:first-child {
+            margin-top: 150px;
+        }
+    }
+}
+
+.active {
+    border-left: 8px solid white !important;
+}
+
+.logged-in-user-profile {
+    position: absolute;
+    bottom: 40px;
+    left: 70px;
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 2px solid white;
+}

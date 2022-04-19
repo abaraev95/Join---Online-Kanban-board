@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "join-a6ecd": {
+      "hosting": {
+        "Join": [
+          "join-a6ecd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "join-a6ecd"
+  }
+}

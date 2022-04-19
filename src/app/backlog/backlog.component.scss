@@ -1,0 +1,96 @@
+.backlog-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: calc(100vw - 200px);
+    height: 100vh;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+    padding-top: 32px;
+}
+
+table {
+    border-collapse: seperate;
+    border-spacing: 0px 12px;
+    font-size: 16px;
+}
+
+th {
+    text-align: start;
+
+    &:first-child {
+        width: 30%;
+    }
+
+    &:last-child {
+        width: 50%;
+    }
+}
+
+td {
+    height: 80px;
+
+    &:first-child {
+        position: relative;
+        overflow: hidden;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        padding-left: 16px;
+    }
+
+    &:last-child {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        position: relative;
+        padding-right: 96px;
+    }
+
+    img {
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        margin-right: 16px;
+    }
+
+    .category-color {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 5px;
+        background-color: pink;
+    }
+}
+
+tr {
+    background-color: rgba(0,0,0,0.04);
+
+    &:hover {
+        background-color: rgba(0,0,0,0.2);
+    }
+
+    &:first-child {
+        background-color: white;
+
+        &:hover {
+            background-color: white;
+        }
+    }
+}
+
+.delete-btn {
+    position: absolute;
+    right: 16px;
+    top: 20px;
+}
+
+.details-btn {
+    position: absolute;
+    right: 64px;
+    top: 20px;
+
+    mat-icon {
+        font-size: 30px;
+    }
+}

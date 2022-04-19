@@ -1,0 +1,139 @@
+<div class="addTask-container">
+    <h1>Add Task</h1>
+    <p>Project Management System</p>
+
+    <!-- <form (ngSubmit)="createTask()">
+        <div class="row">
+            <div class="column">
+                <label for="title">TITLE</label>
+                <input id="title" type="text" required>
+            </div>
+            <div class="column">
+                <label for="date">DUE DATE</label>
+                <input id="date" type="text" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="category">CATEGORY</label>
+                <input id="category" type="text" required>
+            </div>
+            <div class="column">
+                <label for="urgency">URGENCY</label>
+                <input id="urgency" type="text" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="desc">DESCRIPTION</label>
+                <input id="desc" type="text" required>
+            </div>
+            <div class="column">
+                <label for="assigned">ASSIGNED TO</label>
+                <input id="assigned" type="text" required>
+            </div>
+        </div>
+        <input type="submit" value="CREATE TASK">
+    </form> -->
+
+    <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
+        <table>
+            <tr>
+                <td>TITLE</td>
+                <td>DUE DATE</td>
+            </tr>
+            <tr>
+                <td><input type="text" placeholder="Write a title..." formControlName="title"></td>
+                <td><input type="date" formControlName="dueDate"></td>
+            </tr>
+            <tr>
+                <td>CATEGORY</td>
+                <td>URGENCY</td>
+            </tr>
+            <tr>
+                <td>
+                    <select formControlName="category">
+                        <option>Management</option>
+                        <option>Purchasing</option>
+                        <option>Controlling</option>
+                        <option>R&D</option>
+                    </select>
+                </td>
+                <td>
+                    <select formControlName="urgency">
+                        <option>Low</option>
+                        <option>Middle</option>
+                        <option>High</option>
+                        <option>Very High</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>DESCRIPTION</td>
+                <td>ASSIGNED TO</td>
+            </tr>
+            <tr>
+                <td><textarea placeholder="Describe your task..." formControlName="description"></textarea></td>
+                <td class="row align-items-start">
+                    <!-- <select formControlName="AssignedTo">
+                        <option>Low</option>
+                        <option>Middle</option>
+                        <option>High</option>
+                        <option>Very High</option>
+                    </select> -->
+                    <div class="addUser-btn" (click)="addUser()">
+                        <img src="./assets/img/icon-plus.png">
+                    </div>
+                    <div class="assignedTo-container">
+                        <div class="container-checkbox" *ngFor="let employee of employees; index as i">
+                            <input type="checkbox" [id]="'myCheckbox-' + i" formArrayName="assignedTo"
+                            (change)="onCheckboxChange($event, employee)">
+                            <label [for]="'myCheckbox-' + i">
+                                <img src="{{ employee.img }}">
+                                <div class="info">{{ employee.name }}</div>
+                            </label>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="btn-container">
+            <button mat-button type="button">CANCEL</button>
+            <input type="submit" value="CREATE TASK" [disabled]="taskForm.invalid">
+            <!-- <input id="selected-user"> -->
+        </div>
+        <!-- <div id="clearPopup" class="clear-all-inputs">
+            <span>Clear all?</span>
+            <div class="flex-direction-row">
+                <button onclick="clearAll()">YES</button>
+                <button onclick="noClearing()">NO</button>
+            </div>
+        </div> -->
+    </form>
+
+    <br><br><br>
+
+ 
+    <!-- <form [formGroup]="testForm" (ngSubmit)="onSubmit()">
+
+        <label>
+            Name:
+            <input type="text" formControlName="Name">
+        </label>
+
+        <br>
+        <span style="color:red;" *ngIf="name && name.invalid && name.touched">This input field is not valid</span>
+        <br>
+
+        <label>
+            Designation:
+            <input type="text" formControlName="Designation">
+        </label>
+        <br>
+        <span style="color:red;" *ngIf="designation && designation.invalid && designation.touched">This input field is not valid</span>
+        <br>
+
+        <button type="submit" [disabled]="testForm.invalid">Submit</button>
+    </form> -->
+
+</div>
