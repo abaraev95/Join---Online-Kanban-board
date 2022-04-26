@@ -37,9 +37,10 @@
 
         <tr *ngFor="let task of allTasks; let i = index">
             <td>
-                <div class="category-color"></div>
+                <div class="category-color" [ngClass]="task.category"></div>
                 <div class="row">
-                    <img src="./assets/img/logo.png">
+                    <!-- <img src="./assets/img/logo.png"> -->
+                    <img [src]="task.assignedTo[0].img">
                     <div class="column">
                         <span>{{ task.title }}</span>
                         <span>{{ showAllUsers(i) }}</span>

@@ -29,6 +29,10 @@ textarea {
     width: 100%;
 }
 
+.mat-form-field {
+    width: 100%;
+}
+
 input, select {
     height: 50px;
 }
@@ -95,21 +99,21 @@ input, select {
     }
 }
 
-.addUser-btn {
-    height: 80px;
-    width: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: transparent;
-    border: none;
+// .addUser-btn {
+//     height: 80px;
+//     width: 60px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     background-color: transparent;
+//     border: none;
 
-    img {
-        height: 40px;
-        width: 40px;
-        cursor: pointer;
-    }
-}
+//     img {
+//         height: 40px;
+//         width: 40px;
+//         cursor: pointer;
+//     }
+// }
 
 form {
     position: relative;
@@ -151,3 +155,14 @@ textarea {
     }
 }
 
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline  {
+    background-color: white !important;
+    border-radius: 5px;  
+}
+
+::ng-deep .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .date-icon .mat-datepicker-toggle-default-icon {
+    display: block;
+    width: 60px !important;
+    height: 60px !important;
+}

@@ -34,10 +34,18 @@ p {
     display: flex;
     flex-direction: column;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .align-items-start {
     display: flex;
     align-items: flex-start !important;
+}
+
+.mr-16 {
+    margin-right: 16px;
+}
+
+.full-width {
+    width: 100% !important;
 }

@@ -8,6 +8,7 @@
     box-sizing: border-box;
     padding-bottom: 50px;
     padding-top: 32px;
+    overflow-y:auto
 }
 
 table {
@@ -37,6 +38,7 @@ td {
         border-top-left-radius: 8px;
         border-bottom-left-radius: 8px;
         padding-left: 16px;
+        padding-right: 16px;
     }
 
     &:last-child {
@@ -59,9 +61,22 @@ td {
         left: 0;
         bottom: 0;
         width: 5px;
-        background-color: pink;
+        background-color: blue;
     }
 }
+
+.Purchasing {
+    background-color: green !important;
+}
+
+.Management {
+    background-color: pink !important;
+}
+
+.Controlling {
+    background-color: yellow !important;
+}
+
 
 tr {
     background-color: rgba(0,0,0,0.04);

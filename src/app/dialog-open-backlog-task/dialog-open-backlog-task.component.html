@@ -1,50 +1,66 @@
-<div>
-    <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
-  
-    <h1 mat-dialog-title>Add user</h1>
-    <div mat-dialog-content>
-      <div>
+<div class="view-backlog-task-container">
+  <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
+
+  <h1 mat-dialog-title>View Task</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="editForm">
+      <div class="row">
         <mat-form-field appearance="outline">
-          <mat-label>First name</mat-label>
-          <input [(ngModel)]="allTasks[0].title" matInput placeholder="Name">
-          <!-- <mat-hint>Please enter a name</mat-hint> -->
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Title" formControlName="title">
         </mat-form-field>
-  
+
         <mat-form-field appearance="outline">
-          <mat-label>Last name</mat-label>
-          <input [(ngModel)]="allTasks[0].category" matInput placeholder="Category">
-          <!-- <mat-hint>Please enter a name</mat-hint> -->
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker1" placeholder="Placeholder" formControlName="dueDate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <select matNativeControl matInput placeholder="Category" formControlName="category">
+            <option>Management</option>
+            <option>Purchasing</option>
+            <option>Controlling</option>
+            <option>R&D</option>
+          </select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Urgency</mat-label>
+          <select matNativeControl matInput placeholder="Urgency" formControlName="urgency">
+            <option>Low</option>
+            <option>Middle</option>
+            <option>High</option>
+            <option>Very High</option>
+          </select>
         </mat-form-field>
       </div>
 
       <div>
-        <mat-form-field appearance="outline">
-          <mat-label>First name</mat-label>
-          <input [(ngModel)]="allTasks[0].assignedTo[0].email" matInput placeholder="Name">
-          <!-- <mat-hint>Please enter a name</mat-hint> -->
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline">
-          <mat-label>Last name</mat-label>
-          <input [(ngModel)]="allTasks[0].assignedTo[0].name" matInput placeholder="Category">
-          <!-- <mat-hint>Please enter a name</mat-hint> -->
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Write something... " formControlName="description">
+        </textarea>
         </mat-form-field>
       </div>
-  
-     <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Birthdate</mat-label>
-          <input [(ngModel)]="allTasks[0].dueDate" matInput [matDatepicker]="picker1" placeholder="Placeholder">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </mat-form-field>
-      </div> 
-  
-      
-    </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="dialogRef.close()">Cancel</button>
-      <button mat-button (click)="saveTask()" cdkFocusInitial>Save</button>
-    </div>
-  
+
+      <div class="btn-position" mat-dialog-actions>
+        <button mat-button (click)="dialogRef.close()">Cancel</button>
+        <button mat-button type="submit" (click)="saveTask()" cdkFocusInitial [disabled]="editForm.invalid">Save</button>
+        <button mat-button type="submit" (click)="moveToBoard()" cdkFocusInitial [disabled]="editForm.invalid">Move to Board</button>
+      </div>
+
+    </form>
+
+    <ng-multiselect-dropdown class="dropdown-assignment" [placeholder]="'custom placeholder'" [settings]="dropdownSettings" [data]="dropdownList"
+      [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)">
+    </ng-multiselect-dropdown>
   </div>
+
+
+</div>

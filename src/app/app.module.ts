@@ -27,6 +27,11 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FormsModule } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import {MatCardModule} from '@angular/material/card';
+import { FilterPipe } from './Pipes/filter.pipe';
+import {MatSelectModule} from '@angular/material/select';
+import { TrashComponent } from './trash/trash.component';
 
 
 
@@ -38,7 +43,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     BacklogComponent,
     DialogDeleteBacklogTaskComponent,
     DialogOpenBacklogTaskComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    FilterPipe,
+    TrashComponent
   ],
   imports: [
     BrowserModule,
@@ -60,8 +67,12 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     FormsModule,
     MatInputModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    MatCardModule,
+    MatSelectModule,
   ],
+  exports: [FilterPipe],
   providers: [],
   bootstrap: [AppComponent]
 })

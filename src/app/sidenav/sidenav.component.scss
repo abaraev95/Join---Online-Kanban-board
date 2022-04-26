@@ -6,7 +6,7 @@
     height: 100vh;
     position: relative;
     background-color: blue;
-    color: white;
+    color: rgba(255,255,255,0.5);
 }
 
 .logo {
@@ -26,6 +26,7 @@
         padding-left: 40px;
         margin-bottom: 16px;
         border-left: 8px solid transparent;
+        cursor: pointer;
 
         &:first-child {
             margin-top: 150px;
@@ -35,6 +36,7 @@
 
 .active {
     border-left: 8px solid white !important;
+    color: white !important;
 }
 
 .logged-in-user-profile {

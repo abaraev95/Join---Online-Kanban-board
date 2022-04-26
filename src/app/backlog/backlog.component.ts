@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
+import { Task } from 'src/models/task.class';
 import { DialogDeleteBacklogTaskComponent } from '../dialog-delete-backlog-task/dialog-delete-backlog-task.component';
 import { DialogOpenBacklogTaskComponent } from '../dialog-open-backlog-task/dialog-open-backlog-task.component';
 
@@ -31,7 +32,8 @@ export class BacklogComponent implements OnInit {
 
   openDialogTask(index: number) {
     const dialogRef = this.dialog.open(DialogOpenBacklogTaskComponent);
-    dialogRef.componentInstance.allTasks.push(this.allTasks[index]);
+    let copyTask = this.allTasks[index];
+    dialogRef.componentInstance.allTasks.push(new Task(copyTask));
   }
 
   showAllUsers(index: number) {
