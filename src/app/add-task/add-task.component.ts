@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Validators, FormBuilder, FormGroup, FormControl, FormArray, MinValidator, AbstractControl } from '@angular/forms';
-import { formatDate } from '@angular/common' 
+import { Validators, FormBuilder, FormGroup, FormControl, FormArray, MinValidator, AbstractControl, FormGroupDirective, CheckboxControlValueAccessor } from '@angular/forms';
+import { formatDate } from '@angular/common'
 
 
 @Component({
@@ -11,48 +11,12 @@ import { formatDate } from '@angular/common'
 })
 export class AddTaskComponent implements OnInit {
 
-  // employees = [
-  //   {
-  //     id: '1',
-  //     name: 'Alexander Baraev',
-  //     img: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2021-mazda-mx-5-miata-mmp-1-1593459650.jpg?crop=0.781xw:0.739xh;0.109xw,0.0968xh&resize=480:*',
-  //     email: 'abaraev@gmail.de'
-  //   },
-  //   {
-  //     id: '2',
-  //     name: 'Erika Baraev',
-  //     img: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-chevrolet-corvette-c8-102-1571146873.jpg?crop=0.548xw:0.411xh;0.255xw,0.321xh&resize=980:*',
-  //     email: 'abaraev@gmail.de'
-  //   },
-  //   {
-  //     id: '3',
-  //     name: 'Dinho',
-  //     img: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2021-porsche-cayman-mmp-1-1593003674.jpg?crop=0.648xw:0.485xh;0.129xw,0.263xh&resize=980:*',
-  //     email: 'abaraev@gmail.de'
-  //   },
-  //   {
-  //     id: '4',
-  //     name: 'Nala',
-  //     img: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2020-chevrolet-corvette-c8-102-1571146873.jpg?crop=0.548xw:0.411xh;0.255xw,0.321xh&resize=980:*',
-  //     email: 'abaraev@gmail.de'
-  //   },
-  //   {
-  //     id: '5',
-  //     name: 'Peter',
-  //     img: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2021-porsche-cayman-mmp-1-1593003674.jpg?crop=0.648xw:0.485xh;0.129xw,0.263xh&resize=980:*',
-  //     email: 'abaraev@gmail.de'
-  //   }
-  // ];
-
   employees: any[] = [];
-
-  // testForm = new FormGroup({
-  //   Name: new FormControl('', [Validators.required, Validators.email]),
-  //   Designation: new FormControl('', [Validators.required, Validators.minLength(5)])
-  // });
 
   taskForm!: FormGroup;
   date!: Date;
+
+  taskAdded = false;
 
   options!: FormGroup;
   hideRequiredControl = new FormControl(false);
@@ -103,22 +67,28 @@ export class AddTaskComponent implements OnInit {
       });
     }
   }
+
+  @ViewChild(FormGroupDirective) formDirective!: FormGroupDirective;
+
   submitForm() {
-
+    this.taskAdded = true;
     let date: any = this.taskForm.controls['dueDate'].value;
-    this.taskForm.controls['dueDate'].setValue(formatDate(date,'yyyy-MM-dd','en'));
-    
-    let formObj = this.taskForm.getRawValue();
+    this.taskForm.controls['dueDate'].setValue(formatDate(date, 'yyyy-MM-dd', 'en'));
 
+    let formObj = this.taskForm.getRawValue();
     this.firestore
       .collection('tasks')
       .add(formObj)
       .then(() => {
         console.log('Task added:', formObj);
+        this.formDirective.resetForm();
         this.taskForm.reset();
-        this.taskForm.controls['description'].markAsUntouched();
+        this.uncheckAll();
       })
 
+    setTimeout(() => {
+      this.taskAdded = false;
+    }, 1000);
   }
 
   addUser() {
@@ -135,6 +105,18 @@ export class AddTaskComponent implements OnInit {
     }
     return null;
 
+  }
+
+  resetForm() {
+    this.taskForm.reset();
+    this.uncheckAll();
+  }
+
+  uncheckAll() {
+    for (let i = 0; i < this.employees.length; i++) {
+      let checkbox: any = document.getElementById('myCheckbox-' + i);
+      checkbox.checked = false;
+    }
   }
 
 }

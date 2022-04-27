@@ -26,8 +26,10 @@ export class BacklogComponent implements OnInit {
       });
   }
 
-  openDialogDelete() {
+  openDialogDelete(index: number) {
     const dialogRef = this.dialog.open(DialogDeleteBacklogTaskComponent);
+    dialogRef.componentInstance.backlogTasks = this.allTasks;  
+    dialogRef.componentInstance.index = index;  
   }
 
   openDialogTask(index: number) {

@@ -22,4 +22,6 @@ export class FilterPipe implements PipeTransform {
     // return items.filter(item => item.location.indexOf(filter) !== -1);
   }
 
+  
+
 }

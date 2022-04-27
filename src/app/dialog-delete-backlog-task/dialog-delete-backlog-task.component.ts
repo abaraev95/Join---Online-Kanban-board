@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -8,17 +9,29 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogDeleteBacklogTaskComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<DialogDeleteBacklogTaskComponent>) { }
+  backlogTasks: any[] = [];
+  index!: number;
+
+  constructor(public dialogRef: MatDialogRef<DialogDeleteBacklogTaskComponent>, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
   }
 
-  onNoClick() {
-
+  deleteFromBacklog() {
+    this.firestore
+      .collection('tasks')
+      .doc(this.backlogTasks[this.index].customIdName)
+      .delete();
   }
 
-  deleteFromBacklog() {
-
+  moveToTrash() {
+    this.firestore
+      .collection('trash')
+      .add(JSON.parse(JSON.stringify(this.backlogTasks[this.index])))
+      .then(() => {
+        this.deleteFromBacklog();
+        this.dialogRef.close();
+      })
   }
 
 }

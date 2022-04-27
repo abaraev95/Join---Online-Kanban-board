@@ -5,7 +5,9 @@ import { BacklogComponent } from './backlog/backlog.component';
 import { BoardComponent } from './board/board.component';
 import { TrashComponent } from './trash/trash.component';
 
+
 const routes: Routes = [
+  {path: '',  redirectTo: '/board', pathMatch: 'full'},
   {path: 'board', component: BoardComponent},
   {path: 'backlog', component: BacklogComponent},
   {path: 'addtask', component: AddTaskComponent},

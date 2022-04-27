@@ -61,35 +61,25 @@ td {
         left: 0;
         bottom: 0;
         width: 5px;
-        background-color: blue;
+        background-color: red;
     }
 }
 
-.Purchasing {
-    background-color: green !important;
-}
 
-.Management {
-    background-color: pink !important;
-}
-
-.Controlling {
-    background-color: yellow !important;
-}
 
 
 tr {
-    background-color: rgba(0,0,0,0.04);
+    background-color: rgba(0,0,0,0.04) !important;
 
     &:hover {
-        background-color: rgba(0,0,0,0.2);
+        background-color: rgba(0,0,0,0.2) !important;
     }
 
     &:first-child {
-        background-color: white;
+        background-color: white !important;
 
         &:hover {
-            background-color: white;
+            background-color: white !important;
         }
     }
 }

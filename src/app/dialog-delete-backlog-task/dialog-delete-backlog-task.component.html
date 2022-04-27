@@ -3,6 +3,6 @@
   <p>Do you really want to delete this task?</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="deleteFromBacklog()" cdkFocusInitial>Yes</button>
+  <button mat-button (click)="dialogRef.close();">Cancel</button>
+  <button mat-button (click)="moveToTrash()" cdkFocusInitial>Yes</button>
 </div>

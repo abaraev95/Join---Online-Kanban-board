@@ -1,4 +1,5 @@
 <div class="addTask-container">
+
     <h1>Add Task</h1>
     <p>Project Management System</p>
 
@@ -9,7 +10,7 @@
                 <td>DUE DATE</td>
             </tr>
             <tr>
-                <td>
+                <td> 
                     <mat-form-field appearance="outline" [hideRequiredMarker]="hideRequiredControl.value"
                         [floatLabel]="floatLabelControl.value">
                         <input matInput placeholder="Simple placeholder" formControlName="title" required>
@@ -22,8 +23,7 @@
                 <td>
                     <mat-form-field appearance="outline" [hideRequiredMarker]="hideRequiredControl.value"
                         [floatLabel]="floatLabelControl.value">
-                        <input matInput [matDatepicker]="picker" formControlName="dueDate" required>
-                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <input matInput placeholder="MM/DD/YYYY" [matDatepicker]="picker" formControlName="dueDate" required>
                         <mat-datepicker-toggle class="date-icon" matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                         <mat-error
@@ -55,7 +55,7 @@
                             <mat-option value="Low">Low</mat-option>
                             <mat-option value="Middle">Middle</mat-option>
                             <mat-option value="High">High</mat-option>
-                            <mat-option value="Very High">Very High</mat-option>
+                            <mat-option value="VeryHigh">Very High</mat-option>
                         </mat-select>
                         <mat-error *ngIf="taskForm.controls['urgency'].hasError('required')">Please choose an urgency
                         </mat-error>
@@ -93,9 +93,14 @@
             </tr>
         </table>
         <div class="btn-container">
-            <button mat-button type="button">CANCEL</button>
+            <button mat-button type="button" (click)="resetForm()">CLEAR</button>
             <input type="submit" value="CREATE TASK" [disabled]="taskForm.invalid">
         </div>
     </form>
+
+    <div class="add-confirmation" *ngIf="taskAdded">
+        <span>Task added</span>
+        <mat-icon>check_circle</mat-icon>
+    </div>
 
 </div>

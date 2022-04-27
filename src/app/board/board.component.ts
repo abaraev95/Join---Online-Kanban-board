@@ -1,6 +1,8 @@
 import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogOpenBoardTaskComponent } from '../dialog-open-board-task/dialog-open-board-task.component';
 
 @Component({
   selector: 'app-board',
@@ -9,20 +11,20 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class BoardComponent implements OnInit {
 
+
+  boardHeadlines = ['TO DO', 'IN PROGRESS', 'TESTING', 'DONE'];
+  variables = ['toDo', 'progress', 'testing', 'done'];
   boardTasks: any[] = [];
   draggedElement: any = {};
-
-  filterBoard = { location: 'board' };
-
   boardFields = document.getElementsByClassName('board-field');
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
 
     this.firestore
       .collection('boardTasks')
-      .valueChanges({idField: 'customIdName'})
+      .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.boardTasks = changes;
       })
@@ -31,8 +33,8 @@ export class BoardComponent implements OnInit {
   dropElement(position: string, index: number) {
     console.log('dropped');
     console.log(this.draggedElement);
-    
-    
+
+
     this.draggedElement.location = position;
     this.removeHighlight(index);
     this.saveTask();
@@ -44,7 +46,7 @@ export class BoardComponent implements OnInit {
 
   allowDrop(ev: Event) {
     ev.preventDefault();
-  } 
+  }
 
   saveTask() {
     this.firestore
@@ -62,6 +64,29 @@ export class BoardComponent implements OnInit {
 
   removeHighlight(index: number) {
     this.boardFields[index].classList.remove('highlight');
+  }
+
+  getUserCount(task: any) {
+    let count = -1;
+    task.assignedTo.forEach(() => {
+      count++
+    })
+
+    if (count == 0) {
+      return null;
+    }
+    return ' +' + count;
+  }
+
+  openDialogTask(id: number) {
+    this.boardTasks.forEach((task: any) => {
+      if(task.customIdName == id) {
+        let index = this.boardTasks.indexOf(task);
+        const dialogRef = this.dialog.open(DialogOpenBoardTaskComponent);
+        let copyTask = this.boardTasks[index];
+        dialogRef.componentInstance.showTask = copyTask;
+      }
+    })
   }
 
 }

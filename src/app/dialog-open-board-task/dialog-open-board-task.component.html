@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Details</h1>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="all-assignments">
+      <h1>Assigned to:</h1>
+      <div class="row" *ngFor="let user of showTask.assignedTo">
+        <img [src]='user.img'>
+        <span>{{ user.name }}</span>
+      </div>
+    </div>
+    <div>
+      <h1>Title:</h1>
+      {{showTask.title}}
+    </div>
+    <div>
+      <h1>Description:</h1>
+      {{showTask.description}}
+    </div>
+    <div>
+      <h1>Due in:</h1>
+      {{countdown()}}
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button *ngIf="showTask.location == 'toDo'" mat-button>Move to Backlog</button>
+  <!-- <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="deleteFromBacklog()" cdkFocusInitial>Yes</button> -->
+  <button *ngIf="showTask.location == 'done'" mat-button>Task finished</button>
+</div>

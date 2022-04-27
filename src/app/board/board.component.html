@@ -1,51 +1,17 @@
 <div class="board-container">
-    <div class="field-container">
-        <h2>TO DO</h2>
-        <div class="board-field" (drop)="dropElement('toDo', 0)" (dragover)="allowDrop($event); highlight(0)" (dragleave)="removeHighlight(0)">
-            <mat-card class="boardTask-container" *ngFor="let task of boardTasks | filter:'toDo'" draggable="true" (dragstart)="startDragging(task)">
+    <div class="field-container" *ngFor="let number of [0, 1, 2, 3]; index as i">
+        <h2>{{ boardHeadlines[i]}}</h2>
+        <div class="board-field" (drop)="dropElement(variables[i], i)" (dragover)="allowDrop($event); highlight(i)"
+            (dragleave)="removeHighlight(i)">
+            <mat-card class="boardTask-container" *ngFor="let task of boardTasks | filter:variables[i]; index as j" draggable="true"
+                (dragstart)="startDragging(task)" (click)="openDialogTask(task.customIdName)">
+                <div class="colored-corner" [ngClass]="task.urgency"></div>
                 <mat-card-title>{{ task.title }}</mat-card-title>
                 <mat-card-subtitle>{{ task.category }}</mat-card-subtitle>
                 <mat-card-content>
                     <p>{{ task.description }}</p>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
-
-    <div class="field-container">
-        <h2>IN PROGRESS</h2>
-        <div class="board-field" (drop)="dropElement('progress', 1)" (dragover)="allowDrop($event); highlight(1)" (dragleave)="removeHighlight(1)">
-            <mat-card class="boardTask-container" *ngFor="let task of boardTasks | filter:'progress'" draggable="true" (dragstart)="startDragging(task)">
-                <mat-card-title>{{ task.title }}</mat-card-title>
-                <mat-card-subtitle>{{ task.category }}</mat-card-subtitle>
-                <mat-card-content>
-                    <p>{{ task.description }}</p>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
-
-    <div class="field-container">
-        <h2>TESTING</h2>
-        <div class="board-field" (drop)="dropElement('testing', 2)" (dragover)="allowDrop($event); highlight(2)" (dragleave)="removeHighlight(2)">
-            <mat-card class="boardTask-container" *ngFor="let task of boardTasks | filter:'testing'" draggable="true" (dragstart)="startDragging(task)">
-                <mat-card-title>{{ task.title }}</mat-card-title>
-                <mat-card-subtitle>{{ task.category }}</mat-card-subtitle>
-                <mat-card-content>
-                    <p>{{ task.description }}</p>
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
-
-    <div class="field-container">
-        <h2>DONE</h2>
-        <div class="board-field" (drop)="dropElement('done', 3)" (dragover)="allowDrop($event); highlight(3)" (dragleave)="removeHighlight(3)">
-            <mat-card class="boardTask-container" *ngFor="let task of boardTasks | filter:'done'" draggable="true" (dragstart)="startDragging(task)">
-                <mat-card-title>{{ task.title }}</mat-card-title>
-                <mat-card-subtitle>{{ task.category }}</mat-card-subtitle>
-                <mat-card-content>
-                    <p>{{ task.description }}</p>
+                    <span class="card-assignment">{{task.assignedTo[0].name}}</span>
+                    <span *ngIf="getUserCount(task)" class="card-additional-assignments">{{getUserCount(task)}}</span>
                 </mat-card-content>
             </mat-card>
         </div>
