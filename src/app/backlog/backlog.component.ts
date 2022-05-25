@@ -62,7 +62,7 @@ export class BacklogComponent implements OnInit {
   }
 
   moveToBoard(task: any) {
-    task.location = 'toDo';
+    task.location = 'To-do';
 
     this.firestore
       .collection('boardTasks')

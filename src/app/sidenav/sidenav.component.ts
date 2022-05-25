@@ -14,9 +14,4 @@ export class SidenavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // Checks if path is the same as the current URL and returns true or false
-  isActive(path: string) {
-    return path === this.router.url;
-  }
-
 }

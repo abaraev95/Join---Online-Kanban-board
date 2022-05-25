@@ -50,7 +50,9 @@ export class AddTaskComponent implements OnInit {
       urgency: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       assignedTo: this.fb.array([], [Validators.required]),
-      location: new FormControl('backlog'),
+      location: new FormControl('Backlog'),
+      deleteDate: new FormControl(''),
+      archiveDate: new FormControl(''),
     });
   }
 

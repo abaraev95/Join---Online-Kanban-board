@@ -1,14 +1,13 @@
 <div class="backlog-container">
 
-    <h1>Trash</h1>
+    <h1>Archive</h1>
     <p style="color: red;">Deleting tasks from this view is irrevocable!</p>
 
-    <p *ngIf="!tasksAvailable">There are currently no tasks in your trash.</p>
+    <p *ngIf="!tasksAvailable">There are currently no tasks in your archive.</p>
 
     <table *ngIf="tasksAvailable">
         <tr>
-            <th>DELETE DATE</th>
-            <th>DELETED FROM</th>
+            <th>ARCHIVE DATE</th>
             <th>CATEGORY</th>
             <th>TITLE</th>
             <th>DESCRIPTION</th>
@@ -16,13 +15,11 @@
         </tr>
 
 
-        <tr *ngFor="let item of trash; let i = index">
+        <tr *ngFor="let item of archive; let i = index">
             <td>
                 {{ item.deleteDate }}
             </td>
-            <td>
-                {{ item.location }}
-            </td>
+
             <td>
                 {{ item.category }}
             </td>
@@ -37,7 +34,7 @@
 
             <td>
                 <div class="column">
-                    <div class="row" *ngFor="let user of trash[i].assignedTo">
+                    <div class="row" *ngFor="let user of archive[i].assignedTo">
                         <img [src]="user.img">
                         <div class="column">
                             <span>{{ user.name }}</span>

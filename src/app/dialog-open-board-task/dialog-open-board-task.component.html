@@ -46,8 +46,12 @@
   </div>
 </div>
 <div mat-dialog-actions>
-  <button *ngIf="showTask.location == 'toDo'" mat-button cdkFocusInitial (click)="moveToBacklog()">Move to Backlog</button>
+  <button *ngIf="showTask.location == 'To-do'" mat-button cdkFocusInitial (click)="moveToBacklog()">Move to
+    Backlog</button>
   <!-- <button mat-button (click)="onNoClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="deleteFromBacklog()" cdkFocusInitial>Yes</button> -->
-  <button *ngIf="showTask.location == 'done'" mat-button cdkFocusInitial (click)="taskFinished()">Task finished</button>
+  <button *ngIf="showTask.location == 'Done'" mat-button cdkFocusInitial (click)="taskFinished()">Task finished</button>
+  <button mat-button matTooltip="Delete this task" class="delete-btn" (click)="moveToTrash()">
+    <mat-icon>delete</mat-icon>
+  </button>
 </div>

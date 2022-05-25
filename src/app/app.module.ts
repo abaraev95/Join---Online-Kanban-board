@@ -37,6 +37,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
 import { AboutComponent } from './about/about.component';
+import { ArchiveComponent } from './archive/archive.component';
+import { HelpComponent } from './help/help.component';
+import { DialogDeleteTaskForeverComponent } from './dialog-delete-task-forever/dialog-delete-task-forever.component';
 
 
 @NgModule({
@@ -53,6 +56,9 @@ import { AboutComponent } from './about/about.component';
     DialogOpenBoardTaskComponent,
     PrivacyNoticeComponent,
     AboutComponent,
+    ArchiveComponent,
+    HelpComponent,
+    DialogDeleteTaskForeverComponent,
   ],
   imports: [
     BrowserModule,

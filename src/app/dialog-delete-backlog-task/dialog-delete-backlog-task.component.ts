@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -21,8 +22,18 @@ export class DialogDeleteBacklogTaskComponent implements OnInit {
     this.firestore
       .collection('tasks')
       .doc(this.backlogTasks[this.index].customIdName)
-      .delete()
+      .delete();
+  }
+
+  moveToTrash() {
+    const today = new Date()
+    this.backlogTasks[this.index].deleteDate = formatDate(today, 'yyyy-MM-dd', 'en')
+
+    this.firestore
+      .collection('trash')
+      .add(JSON.parse(JSON.stringify(this.backlogTasks[this.index])))
       .then(() => {
+        this.deleteFromBacklog();
         this.dialogRef.close();
       })
   }

@@ -14,7 +14,7 @@ export class BoardComponent implements OnInit {
 
 
   boardHeadlines = ['TO DO', 'IN PROGRESS', 'TESTING', 'DONE'];
-  variables = ['toDo', 'progress', 'testing', 'done'];
+  variables = ['To-do', 'Progress', 'Testing', 'Done'];
   boardTasks: any[] = [];
   draggedElement: any = {};
   boardFields = document.getElementsByClassName('board-field');

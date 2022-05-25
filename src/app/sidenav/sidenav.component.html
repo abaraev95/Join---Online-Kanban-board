@@ -2,13 +2,15 @@
     <img class="logo" src="./assets/img/logo.png">
 
     <ul class="nav-links">
-        <li routerLink="/board" [class.active]="isActive('/board')">Board</li>
-        <li routerLink="/backlog" [class.active]="isActive('/backlog')">Backlog</li>
-        <li routerLink="/addtask" [class.active]="isActive('/addtask')">Add Task</li>
-        <li routerLink="/trash" [class.active]="isActive('/trash')">Add Task</li>
+        <li routerLink="/board" routerLinkActive="active">Board</li>
+        <li routerLink="/backlog" routerLinkActive="active">Backlog</li>
+        <li routerLink="/addtask" routerLinkActive="active">Add Task</li>
+        <li routerLink="/archive" routerLinkActive="active">Archive</li>
+        <li routerLink="/trash"  routerLinkActive="active">Trash</li>
         <hr>
-        <li routerLink="/privacy" [class.active]="isActive('/privacy')">Privacy</li>
-        <li routerLink="/about" [class.active]="isActive('/about')">About</li>
+        <li routerLink="/help"  routerLinkActive="active">Help</li>
+        <li routerLink="/privacy"  routerLinkActive="active">Privacy</li>
+        <li routerLink="/about"  routerLinkActive="active">About</li>
     </ul>
 
     <!-- <img class="logged-in-user-profile" src="./assets/img/logo.png"> -->

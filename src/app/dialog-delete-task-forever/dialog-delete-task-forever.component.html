@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Delete Task</h1>
 <div mat-dialog-content>
-  <p>Do you really want to delete this task?</p>
+  <p>Do you really want to delete this task forever?</p>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="dialogRef.close();">Cancel</button>
-  <button mat-button (click)="moveToTrash()" cdkFocusInitial>Yes</button>
+  <button mat-button (click)="deleteForever()" cdkFocusInitial>Yes</button>
 </div>

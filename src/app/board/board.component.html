@@ -9,7 +9,7 @@
                 <mat-card-title>{{ task.title }}</mat-card-title>
                 <mat-card-subtitle>{{ task.category }}</mat-card-subtitle>
                 <mat-card-content>
-                    <p>{{ task.description }}</p>
+                    <span>{{ task.description }}</span>
                     <span class="card-assignment">{{task.assignedTo[0].name}}</span>
                     <span *ngIf="getUserCount(task)" class="card-additional-assignments">{{getUserCount(task)}}</span>
                 </mat-card-content>

@@ -54,6 +54,7 @@
 
 ::ng-deep .view-board-task-class .mat-dialog-actions {
     justify-content: center !important;
+    position: relative !important;
 }
 
 
@@ -174,4 +175,10 @@
     font-size: 14px;
     font-weight: 300;
     color: grey;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }

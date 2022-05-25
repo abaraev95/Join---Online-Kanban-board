@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GlobalVariablesService } from '../shared/global/global-variables.service';
+import { formatDate } from '@angular/common'
 
 @Component({
   selector: 'app-dialog-open-board-task',
@@ -13,7 +14,11 @@ export class DialogOpenBoardTaskComponent implements OnInit {
   showTask: any = {};
   id!: string;
 
-  constructor(public dialogRef: MatDialogRef<DialogOpenBoardTaskComponent>, private firestore: AngularFirestore, public globalV: GlobalVariablesService) { }
+  constructor(
+    public dialogRef: MatDialogRef<DialogOpenBoardTaskComponent>, 
+    private firestore: AngularFirestore, 
+    public globalV: GlobalVariablesService,
+    ) { }
 
   ngOnInit(): void {
   }
@@ -42,6 +47,13 @@ export class DialogOpenBoardTaskComponent implements OnInit {
   }
 
   taskFinished() {
+    const today = new Date()
+    this.showTask.archiveDate = formatDate(today, 'yyyy-MM-dd', 'en');
+    
+    this.firestore
+      .collection('archive')
+      .add(JSON.parse(JSON.stringify(this.showTask)))
+
     this.deleteFromBoardTasks();
     this.globalV.setTaskCompleted(true);
     setTimeout(() => {
@@ -67,4 +79,19 @@ export class DialogOpenBoardTaskComponent implements OnInit {
         this.dialogRef.close();
       })
   }
+
+  moveToTrash() {
+    const today = new Date()
+    this.showTask.deleteDate = formatDate(today, 'yyyy-MM-dd', 'en')
+
+    this.firestore
+    .collection('trash')
+    .add(JSON.parse(JSON.stringify(this.showTask)))
+    .then(() => {
+      this.deleteFromBoardTasks();
+      this.dialogRef.close();
+    })
+  }
+
+
 }
