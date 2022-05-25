@@ -15,7 +15,7 @@ export class AppComponent {
 
   checkUrl() {   
     let url = this.router.url;
-    if(url == '/board' || url == '/backlog' || url == '/addtask' || url == '/trash'){
+    if(url != ''){
       return true;
     }
     return false;

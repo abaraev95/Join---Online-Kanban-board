@@ -3,11 +3,14 @@
     <h1>Backlog</h1>
     <p>Project Management System</p>
 
-    <table>
+    <p *ngIf="!tasksAvailable">There are currently no tasks in your backlog. <a routerLink="/addtask">Add a new task here</a></p>
+
+    <table *ngIf="tasksAvailable">
         <tr>
             <th>ASSIGNED TO</th>
             <th>CATEGORY</th>
-            <th>DETAILS</th>
+            <th>TITLE</th>
+            <th>DUE DATE</th>
         </tr>
 
         <!-- <tr>
@@ -42,7 +45,7 @@
                     <!-- <img src="./assets/img/logo.png"> -->
                     <img [src]="task.assignedTo[0].img">
                     <div class="column">
-                        <span>{{ task.title }}</span>
+                        <span>{{ task.assignedTo[0].name }}</span>
                         <span>{{ showAllUsers(i) }}</span>
                     </div>
                 </div>
@@ -51,11 +54,19 @@
             <td>{{ task.category }}</td>
 
             <td>
-                <span>{{ task.description }}</span>
-                <button class="details-btn" mat-icon-button (click)='openDialogTask(i)'>
+                <span>{{ task.title }}</span>
+
+            </td>
+
+            <td>
+                <span>{{ task.dueDate }}</span>
+                <button class="details-btn" mat-icon-button (click)='openDialogTask(i)' matTooltip="View task details">
                     <mat-icon>manage_search</mat-icon>
                 </button>
-                <button class="delete-btn" mat-icon-button (click)="openDialogDelete(i)">
+                <button class="send-btn" mat-icon-button (click)="moveToBoard(task)" matTooltip="Move to board">
+                    <mat-icon>send</mat-icon>
+                </button>
+                <button class="delete-btn" mat-icon-button (click)="openDialogDelete(i)" matTooltip="Delete task" [matTooltipPosition]="'above'">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

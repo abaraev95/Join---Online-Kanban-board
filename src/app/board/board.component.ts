@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogOpenBoardTaskComponent } from '../dialog-open-board-task/dialog-open-board-task.component';
+import { GlobalVariablesService } from '../shared/global/global-variables.service';
 
 @Component({
   selector: 'app-board',
@@ -17,8 +18,9 @@ export class BoardComponent implements OnInit {
   boardTasks: any[] = [];
   draggedElement: any = {};
   boardFields = document.getElementsByClassName('board-field');
+  taskCompleted!: boolean;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, public globalV: GlobalVariablesService) { }
 
   ngOnInit(): void {
 
@@ -28,6 +30,10 @@ export class BoardComponent implements OnInit {
       .subscribe((changes: any) => {
         this.boardTasks = changes;
       })
+
+    this.globalV.getTaskCompleted().subscribe(result => {
+      this.taskCompleted = result;
+    })
   }
 
   dropElement(position: string, index: number) {
@@ -78,13 +84,14 @@ export class BoardComponent implements OnInit {
     return ' +' + count;
   }
 
-  openDialogTask(id: number) {
+  openDialogTask(id: string) {
     this.boardTasks.forEach((task: any) => {
       if(task.customIdName == id) {
         let index = this.boardTasks.indexOf(task);
-        const dialogRef = this.dialog.open(DialogOpenBoardTaskComponent);
+        const dialogRef = this.dialog.open(DialogOpenBoardTaskComponent,  { panelClass: 'view-board-task-class' });
         let copyTask = this.boardTasks[index];
         dialogRef.componentInstance.showTask = copyTask;
+        dialogRef.componentInstance.id = id;
       }
     })
   }

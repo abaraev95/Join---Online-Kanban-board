@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { formatDate } from '@angular/common' 
+import { formatDate } from '@angular/common'
 
 
 @Component({
@@ -49,22 +49,22 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 6,
-      allowSearchFilter: true
+      allowSearchFilter: false
     };
 
     this.changeInAssignments = JSON.parse(JSON.stringify(this.allTasks));
 
     this.editForm = this.fb.group({
       title: new FormControl(this.allTasks[0].title, [Validators.required]),
-      dueDate: new FormControl(this.allTasks[0].dueDate, [Validators.required, this.dateValidator]),
+      dueDate: new FormControl(this.allTasks[0].dueDate, [Validators.required]),
       category: new FormControl(this.allTasks[0].category, [Validators.required]),
       urgency: new FormControl(this.allTasks[0].urgency, [Validators.required]),
       description: new FormControl(this.allTasks[0].description, [Validators.required]),
-    });    
+    });
 
     // this.editForm.controls['dueDate'].setValue(formatDate(this.allTasks[0].dueDate.seconds,'yyyy-MM-dd','en'));
     // console.log(new Date(this.allTasks[0].dueDate.seconds));
-    
+
   }
 
   initSelectedItems() {
@@ -115,11 +115,19 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
 
   }
   onSelectAll(items: any) {
-    // console.log(items);
+    console.log('all selected');
+    this.changeInAssignments[0].assignedTo = [];
 
-    // for (let i = 1; i < this.employees.length; i++) {
-    //   this.allTasks[0].assignedTo.push(this.employees[i]);
-    // }
+    for (const employee of this.employees) {
+      this.changeInAssignments[0].assignedTo.push(employee)
+    }
+
+  }
+
+  onDeSelectAll(items: any) {
+    console.log('all deselected');
+
+    this.changeInAssignments[0].assignedTo = [];
   }
 
   onItemDeSelect(item: any) {
@@ -134,7 +142,7 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
   saveTask() {
     this.updateValues();
     console.log(this.editForm.getRawValue());
-    
+
     this.allTasks[0].assignedTo = this.changeInAssignments[0].assignedTo;
 
     this.firestore
@@ -156,6 +164,7 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
 
   moveToBoard() {
     this.allTasks[0].location = 'toDo';
+    this.saveTask();
 
     this.firestore
       .collection('boardTasks')
@@ -174,19 +183,19 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
       .doc(this.allTasks[0].customIdName)
       .delete()
       .then(() => {
-        console.log('Task deleted from Backlog'); 
+        console.log('Task deleted from Backlog');
       })
   }
 
-  dateValidator(control: AbstractControl) {
-    if (control?.value) {
-        const today = new Date();
-        const dateToCheck = new Date(control.value);
-        if (dateToCheck < today) {
-            return {'Invalid date': true}
-        }
-    }
-    return null;
-}
+  //   dateValidator(control: AbstractControl) {
+  //     if (control?.value) {
+  //         const today = new Date();
+  //         const dateToCheck = new Date(control.value);
+  //         if (dateToCheck < today) {
+  //             return {'Invalid date': true}
+  //         }
+  //     }
+  //     return null;
+  // }
 
 }

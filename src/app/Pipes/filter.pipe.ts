@@ -19,7 +19,6 @@ export class FilterPipe implements PipeTransform {
     })
 
     return filteredArray;
-    // return items.filter(item => item.location.indexOf(filter) !== -1);
   }
 
   

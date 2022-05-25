@@ -13,6 +13,7 @@ import { DialogOpenBacklogTaskComponent } from '../dialog-open-backlog-task/dial
 export class BacklogComponent implements OnInit {
 
   allTasks: any[] = [];
+  tasksAvailable = true;
 
   constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
 
@@ -23,6 +24,11 @@ export class BacklogComponent implements OnInit {
       .subscribe((changes: any) => {
         console.log('received changes from db:', changes);
         this.allTasks = changes;
+        if(this.allTasks.length > 0) {
+          this.tasksAvailable = true;
+        } else if (this.allTasks.length == 0) {
+          this.tasksAvailable = false;
+        }
       });
   }
 
@@ -33,7 +39,7 @@ export class BacklogComponent implements OnInit {
   }
 
   openDialogTask(index: number) {
-    const dialogRef = this.dialog.open(DialogOpenBacklogTaskComponent);
+    const dialogRef = this.dialog.open(DialogOpenBacklogTaskComponent,  { panelClass: 'view-task-class' });
     let copyTask = this.allTasks[index];
     dialogRef.componentInstance.allTasks.push(new Task(copyTask));
   }
@@ -53,6 +59,29 @@ export class BacklogComponent implements OnInit {
     else {
       return string + ' +' + (count-1);
     }
+  }
+
+  moveToBoard(task: any) {
+    task.location = 'toDo';
+
+    this.firestore
+      .collection('boardTasks')
+      .add(JSON.parse(JSON.stringify(task)))
+      .then(() => {
+        console.log('Board Task added:', task);
+        this.deleteFromBacklog(task);
+      })
+
+  }
+
+  deleteFromBacklog(task: any) {
+    this.firestore
+      .collection('tasks')
+      .doc(task.customIdName)
+      .delete()
+      .then(() => {
+        console.log('Task deleted from Backlog');
+      })
   }
 
 }

@@ -8,18 +8,21 @@
     box-sizing: border-box;
     padding-bottom: 50px;
     padding-top: 32px;
+    background-color: RGB(189, 209, 220);
 }
 
 table {
     margin-top: 16px;
     font-size: 20px;
-    color: blue;
-    background-color: rgba(0, 0, 255, 0.1);
+    color: RGB(21, 107, 148);
+    background-color: RGB(227, 236, 241);
     width: 100%;
     table-layout: fixed;
     border-spacing: 48px 16px;
     padding-top: 16px;
     padding-bottom: 32px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.04);
 }
 
 input,
@@ -162,7 +165,7 @@ textarea {
         height: 40px;
         padding: 0;
         margin-right: 40px;
-        color: blue;
+        color: RGB(21, 107, 148);
     }
 
     input {
@@ -172,12 +175,22 @@ textarea {
         color: white;
         outline: none;
         border: transparent;
-        background-color: blue;
+        background-color:RGB(21, 107, 148);
+        transition: background-color .225s ease-in-out;
+        
         cursor: pointer;
 
         &:disabled {
             background-color: grey;
             cursor: unset;
+
+            &:hover {
+                background-color: grey;
+            }
+        }
+
+        &:hover {
+            background-color:RGBA(21, 107, 148, 0.7);
         }
     }
 }
@@ -210,10 +223,11 @@ textarea {
     flex-direction: column;
     color: green;
     opacity: 0;
-    animation: 1s confirmation ease-in-out;
+    animation: 2s confirmation ease-in-out;
     z-index: 999;
-    top: 50%;
-    left: 50%;
+    top: 30%;
+    width: 500px;
+    left: calc(50% - 150px);
 
     .mat-icon {
         height: auto !important;
@@ -231,11 +245,15 @@ textarea {
 // }
 
 @keyframes confirmation {
-    from {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
         opacity: 1;
     }
 
-    to {
+    100% {
         opacity: 0;
     }
 }

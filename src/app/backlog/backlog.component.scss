@@ -1,6 +1,7 @@
 .backlog-container {
     display: flex;
     flex-direction: column;
+    background-color: RGB(189, 209, 220);
     padding-left: 40px;
     padding-right: 40px;
     width: calc(100vw - 200px);
@@ -13,7 +14,7 @@
 
 table {
     border-collapse: seperate;
-    border-spacing: 0px 12px;
+    border-spacing: 0px 16px;
     font-size: 16px;
 }
 
@@ -25,7 +26,7 @@ th {
     }
 
     &:last-child {
-        width: 50%;
+        width: 25%;
     }
 }
 
@@ -69,22 +70,32 @@ td {
 
 
 tr {
-    background-color: rgba(0,0,0,0.04) !important;
+    background-color: white !important;
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.04) !important;
+    border-radius: 8px;
+
 
     &:hover {
-        background-color: rgba(0,0,0,0.2) !important;
+        background-color: rgba(255, 255, 255, 0.7) !important;
     }
 
     &:first-child {
-        background-color: white !important;
+        background-color: transparent !important;
+        box-shadow: unset !important;
 
         &:hover {
-            background-color: white !important;
+            background-color: transparent !important;
         }
     }
 }
 
 .delete-btn {
+    position: absolute;
+    right: -40px;
+    top: 20px;
+}
+
+.send-btn {
     position: absolute;
     right: 16px;
     top: 20px;

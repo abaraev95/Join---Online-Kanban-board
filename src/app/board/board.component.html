@@ -16,4 +16,9 @@
             </mat-card>
         </div>
     </div>
+
+    <div class="add-confirmation" *ngIf="taskCompleted">
+        <span>Task completed!</span>
+        <mat-icon>check_circle</mat-icon>
+    </div>
 </div>

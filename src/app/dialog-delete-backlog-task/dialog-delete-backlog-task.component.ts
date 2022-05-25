@@ -21,15 +21,8 @@ export class DialogDeleteBacklogTaskComponent implements OnInit {
     this.firestore
       .collection('tasks')
       .doc(this.backlogTasks[this.index].customIdName)
-      .delete();
-  }
-
-  moveToTrash() {
-    this.firestore
-      .collection('trash')
-      .add(JSON.parse(JSON.stringify(this.backlogTasks[this.index])))
+      .delete()
       .then(() => {
-        this.deleteFromBacklog();
         this.dialogRef.close();
       })
   }

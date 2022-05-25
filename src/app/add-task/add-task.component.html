@@ -13,7 +13,7 @@
                 <td> 
                     <mat-form-field appearance="outline" [hideRequiredMarker]="hideRequiredControl.value"
                         [floatLabel]="floatLabelControl.value">
-                        <input matInput placeholder="Simple placeholder" formControlName="title" required>
+                        <input matInput placeholder="Enter a title" formControlName="title" required>
                         <mat-error *ngIf="this.taskForm.controls['title'].hasError('required')">Please enter a Title
                         </mat-error>
 
@@ -23,12 +23,12 @@
                 <td>
                     <mat-form-field appearance="outline" [hideRequiredMarker]="hideRequiredControl.value"
                         [floatLabel]="floatLabelControl.value">
-                        <input matInput placeholder="MM/DD/YYYY" [matDatepicker]="picker" formControlName="dueDate" required>
+                        <input matInput placeholder="MM/DD/YYYY" [min]="today" [matDatepicker]="picker" formControlName="dueDate" required>
                         <mat-datepicker-toggle class="date-icon" matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                         <mat-error
-                            *ngIf="this.taskForm.controls['dueDate'].hasError('Invalid date') || this.taskForm.controls['dueDate'].hasError('required')">
-                            Please enter a valid future date</mat-error>
+                            *ngIf="this.taskForm.controls['dueDate'].hasError('required')">
+                            Please enter a date</mat-error>
                     </mat-form-field>
                 </td>
             </tr>
@@ -39,7 +39,7 @@
             <tr>
                 <td>
                     <mat-form-field appearance="outline">
-                        <mat-select formControlName="category" required>
+                        <mat-select formControlName="category" required placeholder="Choose...">
                             <mat-option value="Management">Management</mat-option>
                             <mat-option value="Purchasing">Purchasing</mat-option>
                             <mat-option value="Controlling">Controlling</mat-option>
@@ -51,7 +51,7 @@
                 </td>
                 <td>
                     <mat-form-field appearance="outline">
-                        <mat-select formControlName="urgency" required>
+                        <mat-select formControlName="urgency" required placeholder="Choose...">
                             <mat-option value="Low">Low</mat-option>
                             <mat-option value="Middle">Middle</mat-option>
                             <mat-option value="High">High</mat-option>
@@ -69,7 +69,7 @@
             <tr>
                 <td>
                     <mat-form-field appearance="outline">
-                        <textarea matInput formControlName="description" required></textarea>
+                        <textarea matInput formControlName="description" required placeholder="Describe your task ..."></textarea>
                         <mat-error *ngIf="taskForm.controls['description'].hasError('required')">Please describe the
                             task</mat-error>
                     </mat-form-field>

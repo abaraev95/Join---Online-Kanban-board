@@ -1,30 +1,53 @@
-<h1 mat-dialog-title>Details</h1>
+<div class="headline-highlight">
+  <h1 mat-dialog-title>Details</h1>
+  <button class="close-btn" mat-button (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 <div mat-dialog-content>
+  <div class="border">
+    <span class="headlines">Title:</span>
+    <span class="show-text">{{showTask.title}}</span>
+  </div>
+  <div class="border2">
+    <span class="headlines">Description:</span>
+    <span class="show-text">{{showTask.description}}</span>
+  </div>
   <div class="row">
     <div class="all-assignments">
-      <h1>Assigned to:</h1>
-      <div class="row" *ngFor="let user of showTask.assignedTo">
-        <img [src]='user.img'>
-        <span>{{ user.name }}</span>
+      <span class="headlines">Assigned to:</span>
+      <div class="overflow">
+        <div class="row" *ngFor="let user of showTask.assignedTo">
+          <img [src]='user.img'>
+          <div class="column">
+            <span class="name">{{ user.name }}</span>
+            <span class="email">{{ user.email }}</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div>
-      <h1>Title:</h1>
-      {{showTask.title}}
+
+    <div class="column">
+      <div class="border3">
+        <span class="headlines">Category:</span>
+        <span>{{showTask.category}}</span>
+      </div>
+      <div class="border3">
+        <span class="headlines">Urgency:</span>
+        <span>{{showTask.urgency}}</span>
+      </div>
     </div>
-    <div>
-      <h1>Description:</h1>
-      {{showTask.description}}
-    </div>
-    <div>
+
+    <div class="all-assignments2">
       <h1>Due in:</h1>
-      {{countdown()}}
+      <span>{{countdown()}}</span>
+      <span>{{ formatDate(showTask.dueDate) }}</span>
     </div>
   </div>
 </div>
 <div mat-dialog-actions>
-  <button *ngIf="showTask.location == 'toDo'" mat-button>Move to Backlog</button>
+  <button *ngIf="showTask.location == 'toDo'" mat-button cdkFocusInitial (click)="moveToBacklog()">Move to Backlog</button>
   <!-- <button mat-button (click)="onNoClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="deleteFromBacklog()" cdkFocusInitial>Yes</button> -->
-  <button *ngIf="showTask.location == 'done'" mat-button>Task finished</button>
+  <button *ngIf="showTask.location == 'done'" mat-button cdkFocusInitial (click)="taskFinished()">Task finished</button>
 </div>

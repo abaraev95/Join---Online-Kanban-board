@@ -34,6 +34,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { TrashComponent } from './trash/trash.component';
 import { DialogOpenBoardTaskComponent } from './dialog-open-board-task/dialog-open-board-task.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -48,6 +51,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FilterPipe,
     TrashComponent,
     DialogOpenBoardTaskComponent,
+    PrivacyNoticeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     NgMultiSelectDropDownModule.forRoot(),
     MatCardModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   exports: [FilterPipe],
   providers: [],

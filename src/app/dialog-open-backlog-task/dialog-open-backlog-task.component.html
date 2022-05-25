@@ -1,7 +1,11 @@
 <div class="view-backlog-task-container">
   <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
 
-  <h1 mat-dialog-title>View Task</h1>
+  <div class="headline-highlight">
+    <h1 mat-dialog-title>View Task</h1>
+    <button class="close-btn" mat-button (click)="dialogRef.close()"><mat-icon>close</mat-icon></button>
+  </div>
+
   <div mat-dialog-content>
     <form [formGroup]="editForm">
       <div class="row">
@@ -32,10 +36,10 @@
         <mat-form-field appearance="outline">
           <mat-label>Urgency</mat-label>
           <select matNativeControl matInput placeholder="Urgency" formControlName="urgency">
-            <option>Low</option>
-            <option>Middle</option>
-            <option>High</option>
-            <option>Very High</option>
+            <option value="Low">Low</option>
+            <option value="Middle">Middle</option>
+            <option value="High">High</option>
+            <option value="VeryHigh">Very High</option>
           </select>
         </mat-form-field>
       </div>
@@ -50,15 +54,14 @@
       </div>
 
       <div class="btn-position" mat-dialog-actions>
-        <button mat-button (click)="dialogRef.close()">Cancel</button>
-        <button mat-button type="submit" (click)="saveTask()" cdkFocusInitial [disabled]="editForm.invalid">Save</button>
-        <button mat-button type="submit" (click)="moveToBoard()" cdkFocusInitial [disabled]="editForm.invalid">Move to Board</button>
+        <button mat-button type="submit" (click)="saveTask()" cdkFocusInitial [disabled]="editForm.invalid || changeInAssignments[0].assignedTo.length < 1">Save</button>
+        <button mat-button type="submit" (click)="moveToBoard()" cdkFocusInitial [disabled]="editForm.invalid || changeInAssignments[0].assignedTo.length < 1">Move to Board</button>
       </div>
 
     </form>
 
-    <ng-multiselect-dropdown class="dropdown-assignment" [placeholder]="'custom placeholder'" [settings]="dropdownSettings" [data]="dropdownList"
-      [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)">
+    <ng-multiselect-dropdown class="dropdown-assignment" [placeholder]="'Assign this task to...'" [settings]="dropdownSettings" [data]="dropdownList"
+      [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onDeSelect)="onItemDeSelect($event)"  (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
     </ng-multiselect-dropdown>
   </div>
 

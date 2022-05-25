@@ -15,6 +15,7 @@ export class AddTaskComponent implements OnInit {
 
   taskForm!: FormGroup;
   date!: Date;
+  today!: Date;
 
   taskAdded = false;
 
@@ -26,6 +27,7 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.today = new Date();
 
     this.options = this.fb.group({
       hideRequired: this.hideRequiredControl,
@@ -43,7 +45,7 @@ export class AddTaskComponent implements OnInit {
   createForm() {
     this.taskForm = this.fb.group({
       title: new FormControl('', [Validators.required]),
-      dueDate: new FormControl('', [this.dateValidator, Validators.required]),
+      dueDate: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
       urgency: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -88,24 +90,24 @@ export class AddTaskComponent implements OnInit {
 
     setTimeout(() => {
       this.taskAdded = false;
-    }, 1000);
+    }, 2000);
   }
 
   addUser() {
     console.log('add user');
   }
 
-  dateValidator(control: AbstractControl) {
-    if (control?.value) {
-      const today = new Date();
-      const dateToCheck = new Date(control.value);
-      if (dateToCheck < today) {
-        return { 'Invalid date': true }
-      }
-    }
-    return null;
+  // dateValidator(control: AbstractControl) {
+  //   if (control?.value) {
+  //     const today = new Date();
+  //     const dateToCheck = new Date(control.value);
+  //     if (dateToCheck < today) {
+  //       return { 'Invalid date': true }
+  //     }
+  //   }
+  //   return null;
 
-  }
+  // }
 
   resetForm() {
     this.taskForm.reset();
