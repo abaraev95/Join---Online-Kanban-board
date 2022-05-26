@@ -1,6 +1,6 @@
 .view-backlog-task-container {
     position: relative;
-    height: 500px;
+    height: 600px;
     width: 600px;
 
 
@@ -63,6 +63,10 @@
     padding: 12px 48px !important;
 }
 
+::ng-deep .view-task-class .mat-dialog-actions {
+    justify-content: space-around;
+}
+
 // ::ng-deep .view-task-class .mat-button {
 //     height: 68px;
 //     width: 68px;
@@ -84,4 +88,9 @@ ng-multiselect-dropdown {
 ::ng-deep .dropdown-multiselect__caret {
     right: 30px !important;
     top: 10px !important;
+}
+
+textarea {
+    resize: none !important;
+    height: 128px !important;
 }

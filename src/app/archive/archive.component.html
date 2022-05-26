@@ -17,7 +17,7 @@
 
         <tr *ngFor="let item of archive; let i = index">
             <td>
-                {{ item.deleteDate }}
+                {{ item.archiveDate }}
             </td>
 
             <td>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="action-btn">
                     <button mat-button matTooltip="Restore this task" (click)="restoreTask(i)">
-                        <mat-icon>restore_from_trash</mat-icon>
+                        <mat-icon>unarchive</mat-icon>
                     </button>
                     <button mat-button matTooltip="Delete this task" (click)="openDialogDelete(i)">
                         <mat-icon>delete</mat-icon>

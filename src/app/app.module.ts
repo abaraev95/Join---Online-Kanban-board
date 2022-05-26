@@ -40,6 +40,7 @@ import { AboutComponent } from './about/about.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { HelpComponent } from './help/help.component';
 import { DialogDeleteTaskForeverComponent } from './dialog-delete-task-forever/dialog-delete-task-forever.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { DialogDeleteTaskForeverComponent } from './dialog-delete-task-forever/d
     ArchiveComponent,
     HelpComponent,
     DialogDeleteTaskForeverComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

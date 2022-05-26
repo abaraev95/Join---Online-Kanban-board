@@ -1,5 +1,9 @@
-<div class="desktop-view mobile-view">
+<div class="screen">
   <app-sidenav *ngIf="checkUrl()"></app-sidenav>
-  <router-outlet></router-outlet>
-  <!-- <mat-spinner *ngIf="loading"></mat-spinner> -->
+  <div class="bg">
+    <div [class.d-none]="loading">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <app-spinner *ngIf="loading"></app-spinner>
 </div>

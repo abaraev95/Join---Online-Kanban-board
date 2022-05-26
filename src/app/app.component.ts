@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,18 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Join';
 
-  constructor(private router: Router){    
+  loading = true;
+
+  constructor(private router: Router){
+
+    router.events.subscribe(event => {
+      if(event instanceof NavigationStart){
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+        }, 500);
+      }
+    })
   }
 
   checkUrl() {   

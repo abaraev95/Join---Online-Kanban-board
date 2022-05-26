@@ -18,4 +18,5 @@ export class GlobalVariablesService {
   setTaskCompleted(boolValue: boolean) {
     this.taskCompleted.next(boolValue);
   }
+
 }

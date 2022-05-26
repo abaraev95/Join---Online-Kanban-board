@@ -163,7 +163,7 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
   }
 
   moveToBoard() {
-    this.allTasks[0].location = 'toDo';
+    this.allTasks[0].location = 'To-do';
     this.saveTask();
 
     this.firestore

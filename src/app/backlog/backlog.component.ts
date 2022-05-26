@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Task } from 'src/models/task.class';
 import { DialogDeleteBacklogTaskComponent } from '../dialog-delete-backlog-task/dialog-delete-backlog-task.component';
 import { DialogOpenBacklogTaskComponent } from '../dialog-open-backlog-task/dialog-open-backlog-task.component';
+import { GlobalVariablesService } from '../shared/global/global-variables.service';
 
 @Component({
   selector: 'app-backlog',
@@ -15,9 +16,10 @@ export class BacklogComponent implements OnInit {
   allTasks: any[] = [];
   tasksAvailable = true;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, public globalV: GlobalVariablesService) { }
 
   ngOnInit(): void {
+
     this.firestore
       .collection('tasks')
       .valueChanges({idField: 'customIdName'})

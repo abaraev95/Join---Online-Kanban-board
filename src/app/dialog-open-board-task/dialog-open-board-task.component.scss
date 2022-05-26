@@ -106,6 +106,8 @@
     height: 160px;
     display: flex;
     margin-bottom: 24px;
+    overflow-y:auto;
+
 }
 
 .border3 {
@@ -163,7 +165,8 @@
 .show-text {
     margin-left: 96px;
     font-size: 20px;
-    width: 100%;
+    word-wrap: break-word;
+    width: 600px;
 }
 
 .name {
