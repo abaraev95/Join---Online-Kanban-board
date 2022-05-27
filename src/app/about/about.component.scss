@@ -5,8 +5,13 @@
     padding-right: 40px;
     width: calc(100vw - 200px);
     height: 100vh;
+    overflow-y: auto;
     box-sizing: border-box;
     padding-bottom: 50px;
     padding-top: 32px;
     background-color: RGB(189, 209, 220);
+}
+
+.mb-32 {
+    margin-bottom: 32px !important;
 }

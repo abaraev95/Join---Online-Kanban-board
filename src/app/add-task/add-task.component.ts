@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Validators, FormBuilder, FormGroup, FormControl, FormArray, MinValidator, AbstractControl, FormGroupDirective, CheckboxControlValueAccessor } from '@angular/forms';
 import { formatDate } from '@angular/common'
-
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-add-task',
@@ -18,14 +18,34 @@ export class AddTaskComponent implements OnInit {
   today!: Date;
 
   taskAdded = false;
+  mobileViewPortrait! :boolean;
+  mobileViewLandscape! :boolean;
 
   options!: FormGroup;
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
 
-  constructor(private fb: FormBuilder, private firestore: AngularFirestore) { }
+  constructor(private fb: FormBuilder, private firestore: AngularFirestore, public responsive: BreakpointObserver) { }
 
   ngOnInit(): void {
+    
+    this.responsive.observe([
+      Breakpoints.HandsetPortrait, 
+      Breakpoints.HandsetLandscape])
+      .subscribe(result => {
+        this.mobileViewPortrait= false;
+        this.mobileViewLandscape= false;
+        const breakpoints = result.breakpoints;
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.mobileViewPortrait= true;
+        }
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.mobileViewLandscape= true;
+        }
+
+      })
+    
     this.createForm();
     this.today = new Date();
 

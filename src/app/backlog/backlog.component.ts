@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,9 +17,34 @@ export class BacklogComponent implements OnInit {
   allTasks: any[] = [];
   tasksAvailable = true;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore, public globalV: GlobalVariablesService) { }
+  mobileViewPortrait! :boolean;
+  mobileViewLandscape! :boolean;
+
+  constructor(
+    public dialog: MatDialog, 
+    private firestore: AngularFirestore, 
+    public globalV: GlobalVariablesService,
+    public responsive: BreakpointObserver
+  ) { }
 
   ngOnInit(): void {
+
+    this.responsive.observe([
+      Breakpoints.HandsetPortrait, 
+      Breakpoints.HandsetLandscape])
+      .subscribe(result => {
+        this.mobileViewPortrait= false;
+        this.mobileViewLandscape= false;
+        const breakpoints = result.breakpoints;
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.mobileViewPortrait= true;
+        }
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.mobileViewLandscape= true;
+        }
+
+      })
 
     this.firestore
       .collection('tasks')
@@ -84,6 +110,27 @@ export class BacklogComponent implements OnInit {
       .then(() => {
         console.log('Task deleted from Backlog');
       })
+  }
+
+  showUserNameForMobileView(name: string) {
+    const firstLetter = name.slice(0,1);
+    const arrayOfFullname = name.split(' ');
+    let fullname = firstLetter + '. ' + arrayOfFullname[1]
+    return fullname;
+  }
+
+  showAdditionalUserForMobileView(index: number) {
+    let count = 0;
+
+    this.allTasks[index].assignedTo.forEach((user: any, i: number) => {
+      count ++;
+    })
+    if(count == 1) {
+      return '';
+    }
+    else {
+      return ' +' + (count-1);
+    }
   }
 
 }

@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { MatDialogRef } from '@angular/material/dialog';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { formatDate } from '@angular/common'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 
 @Component({
@@ -22,9 +23,39 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
 
   editForm!: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<DialogOpenBacklogTaskComponent>, private firestore: AngularFirestore, private fb: FormBuilder) { }
+  mobileViewPortrait! :boolean;
+  mobileViewLandscape! :boolean;
+  showLimit!: number;
+
+  constructor(public dialogRef: MatDialogRef<DialogOpenBacklogTaskComponent>, 
+    private firestore: AngularFirestore, 
+    private fb: FormBuilder,
+    public responsive: BreakpointObserver
+    ) { }
 
   ngOnInit(): void {
+
+        
+    this.responsive.observe([
+      Breakpoints.HandsetPortrait, 
+      Breakpoints.HandsetLandscape])
+      .subscribe(result => {
+        this.mobileViewPortrait= false;
+        this.mobileViewLandscape= false;
+        this.showLimit = 4;
+
+        const breakpoints = result.breakpoints;
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.mobileViewPortrait= true;
+          this.showLimit = 2;
+        }
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.mobileViewLandscape= true;
+          this.showLimit = 2;
+        }
+
+      })
     console.log(this.allTasks);
 
     // this.dropdownList = [
@@ -48,7 +79,7 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 6,
+      itemsShowLimit: this.showLimit,
       allowSearchFilter: false
     };
 

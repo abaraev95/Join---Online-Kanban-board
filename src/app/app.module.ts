@@ -41,6 +41,7 @@ import { ArchiveComponent } from './archive/archive.component';
 import { HelpComponent } from './help/help.component';
 import { DialogDeleteTaskForeverComponent } from './dialog-delete-task-forever/dialog-delete-task-forever.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatCardModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    LayoutModule
   ],
   exports: [FilterPipe],
   providers: [],

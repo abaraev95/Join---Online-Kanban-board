@@ -1,9 +1,12 @@
 <div class="screen">
-  <app-sidenav *ngIf="checkUrl()"></app-sidenav>
-  <div class="bg">
+  <app-sidenav *ngIf="checkUrl()" [ngClass]="{'hide-menu': mobileView && !expandMobileMenu}"></app-sidenav>
+  <div class="bg" [ngClass]="{'full-width-mobile': mobileView, 'translateX': mobileView}">
     <div [class.d-none]="loading">
       <router-outlet></router-outlet>
     </div>
   </div>
   <app-spinner *ngIf="loading"></app-spinner>
+  <div class="mobile-menu" *ngIf="mobileView" (click)="showMobileMenu()">
+    <mat-icon>menu</mat-icon>
+  </div>
 </div>

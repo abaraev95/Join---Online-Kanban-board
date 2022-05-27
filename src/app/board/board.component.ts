@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -19,10 +20,34 @@ export class BoardComponent implements OnInit {
   draggedElement: any = {};
   boardFields = document.getElementsByClassName('board-field');
   taskCompleted!: boolean;
+  mobileViewPortrait! :boolean;
+  mobileViewLandscape! :boolean;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore, public globalV: GlobalVariablesService) { }
+  constructor(
+    public dialog: MatDialog, 
+    private firestore: AngularFirestore, 
+    public globalV: GlobalVariablesService,
+    public responsive: BreakpointObserver
+    ) { }
 
   ngOnInit(): void {
+
+    this.responsive.observe([
+      Breakpoints.HandsetPortrait, 
+      Breakpoints.HandsetLandscape])
+      .subscribe(result => {
+        this.mobileViewPortrait= false;
+        this.mobileViewLandscape= false;
+        const breakpoints = result.breakpoints;
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.mobileViewPortrait= true;
+        }
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.mobileViewLandscape= true;
+        }
+
+      })
 
     this.firestore
       .collection('boardTasks')
@@ -96,4 +121,69 @@ export class BoardComponent implements OnInit {
     })
   }
 
+  showThis(index: number) {
+
+    this.addBorderRadius(index);
+
+    for(let i=0; i<4; i++){
+      document.getElementById('container-' + i)?.classList.add('d-none');
+      document.getElementById('tab-' + i)?.classList.remove('highlightTab');
+    }
+    document.getElementById('container-' + index)?.classList.remove('d-none');
+    document.getElementById('tab-' + index)?.classList.add('highlightTab');
+  }
+
+  showAllFields(){
+    for(let i=0; i<4; i++){
+      document.getElementById('container-' + i)?.classList.remove('d-none');
+    }
+  }
+
+  addBorderRadius(index: number){
+    if(index == 0){
+      this.removeBorderRadius();
+      document.getElementById('tab-1')?.classList.add('border-bottom-left-radius');
+    }
+    if(index == 1){
+      this.removeBorderRadius();
+      document.getElementById('tab-0')?.classList.add('border-bottom-right-radius');
+      document.getElementById('tab-2')?.classList.add('border-bottom-left-radius');
+    }
+    if(index == 2){
+      this.removeBorderRadius();
+      document.getElementById('tab-1')?.classList.add('border-bottom-right-radius');
+      document.getElementById('tab-3')?.classList.add('border-bottom-left-radius');
+    }
+    if(index == 3){
+      this.removeBorderRadius();
+      document.getElementById('tab-2')?.classList.add('border-bottom-right-radius');
+    }
+  }
+
+  removeBorderRadius() {
+    for(let i=0; i<4; i++) {
+      document.getElementById('tab-' + i)?.classList.remove('border-bottom-left-radius');
+      document.getElementById('tab-' + i)?.classList.remove('border-bottom-right-radius');
+    }
+  }
+
+  hideOnFirstLoad(index: number) {
+    if(index > 0){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  filterArray(location: string) {
+    let arr = this.boardTasks.filter(t => t['location'] == location);  
+
+    if(arr.length < 1) {
+      return 'Here are no tasks yet'
+    }
+    else {
+      return null;
+    }
+  }
 }

@@ -1,11 +1,54 @@
-<div class="backlog-container">
+<div class="backlog-container" [ngClass]="{'mobile-container': mobileViewPortrait || mobileViewLandscape}">
 
     <h1>Backlog</h1>
     <p>Project Management System</p>
 
-    <p *ngIf="!tasksAvailable">There are currently no tasks in your backlog. <a routerLink="/addtask">Add a new task here</a></p>
+    <p *ngIf="!tasksAvailable">There are currently no tasks in your backlog. <a routerLink="/addtask">Add a new task</a>
+    </p>
 
-    <table *ngIf="tasksAvailable">
+    <!-- <div class="addTaskForm" [ngClass]="{'pb-64': mobileViewPortrait || mobileViewLandscape}">
+        <div class="row">
+            <div class="cardHeader" style="width:30%">ASSIGNED TO</div>
+            <div class="cardHeader" style="width:22.5%">CATEGORY</div>
+            <div class="cardHeader" style="width:22.5%">TITLE</div>
+            <div class="cardHeader" style="width:25%">DUE DATE</div>
+        </div>
+
+        <div class="card-container" *ngFor="let task of allTasks; let i = index">
+            <div class="assignedField">
+                <div class="category-color" [ngClass]="task.urgency"></div>
+                <div class="row">
+                    <img [src]="task.assignedTo[0].img">
+                    <div class="column">
+                        <span>{{ task.assignedTo[0].name }}</span>
+                        <span>{{ showAllUsers(i) }}</span>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 22.5%">
+                {{ task.category }}
+            </div>
+            <div style="width: 22.5%">
+                {{ task.title }}
+            </div>
+            <div class="dueDateField">
+                <span>{{ task.dueDate }}</span>
+                <button class="details-btn" mat-icon-button (click)='openDialogTask(i)' matTooltip="View task details">
+                    <mat-icon>manage_search</mat-icon>
+                </button>
+                <button class="send-btn" mat-icon-button (click)="moveToBoard(task)" matTooltip="Move to board">
+                    <mat-icon>send</mat-icon>
+                </button>
+                <button class="delete-btn" mat-icon-button (click)="openDialogDelete(i)" matTooltip="Delete task"
+                    [matTooltipPosition]="'above'">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+    </div> -->
+
+    <table *ngIf="tasksAvailable" [ngClass]="{'tableMobile': mobileViewPortrait || mobileViewLandscape}">
         <tr>
             <th>ASSIGNED TO</th>
             <th>CATEGORY</th>
@@ -40,13 +83,18 @@
 
         <tr *ngFor="let task of allTasks; let i = index">
             <td>
+
                 <div class="category-color" [ngClass]="task.urgency"></div>
                 <div class="row">
                     <!-- <img src="./assets/img/logo.png"> -->
                     <img [src]="task.assignedTo[0].img">
-                    <div class="column">
+                    <div class="column justify-content-center" *ngIf="!mobileViewPortrait && !mobileViewLandscape">
                         <span>{{ task.assignedTo[0].name }}</span>
                         <span>{{ showAllUsers(i) }}</span>
+                    </div>
+                    <div class="column justify-content-center" *ngIf="mobileViewPortrait || mobileViewLandscape">
+                        <span>{{ showUserNameForMobileView(task.assignedTo[0].name) }}</span>
+                        <span>{{ showAdditionalUserForMobileView(i) }}</span>
                     </div>
                 </div>
             </td>
@@ -59,19 +107,22 @@
             </td>
 
             <td>
+                <div class="mobileClick" (click)="(mobileViewPortrait || mobileViewLandscape) ? openDialogTask(i) : false"></div>
+
                 <span>{{ task.dueDate }}</span>
-                <button class="details-btn" mat-icon-button (click)='openDialogTask(i)' matTooltip="View task details">
+                <button class="details-btn" mat-icon-button (click)='openDialogTask(i)' matTooltip="View task details"  *ngIf="!mobileViewPortrait && !mobileViewLandscape">
                     <mat-icon>manage_search</mat-icon>
                 </button>
                 <button class="send-btn" mat-icon-button (click)="moveToBoard(task)" matTooltip="Move to board">
                     <mat-icon>send</mat-icon>
                 </button>
-                <button class="delete-btn" mat-icon-button (click)="openDialogDelete(i)" matTooltip="Delete task" [matTooltipPosition]="'above'">
+                <button class="delete-btn" mat-icon-button (click)="openDialogDelete(i)" matTooltip="Delete task"
+                    [matTooltipPosition]="'above'">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>
         </tr>
 
-        
+
     </table>
 </div>

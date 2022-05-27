@@ -175,4 +175,50 @@ mat-card-content {
     transform: rotate(45deg);
 }
 
+.mobileView {
+    width: 100vw !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    overflow-y: auto;
+    height: 90vh !important;
+    padding-bottom: unset !important;
+    padding-top: 40px !important;
+
+    .board-field {
+        height: 75vh !important;
+    }
+}
+
+.mobile-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    background-color: RGB(189, 209, 220);
+
+
+    div {
+        width: 25%;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height: 5vh;
+        background-color: RGB(13, 110, 155);
+    }
+}
+
+.highlightTab {
+    font-size: 16px;
+    background-color: RGB(189, 209, 220) !important;
+}
+
+.border-bottom-left-radius {
+    border-bottom-left-radius: 8px;
+}
+
+.border-bottom-right-radius {
+    border-bottom-right-radius: 8px;
+}
 

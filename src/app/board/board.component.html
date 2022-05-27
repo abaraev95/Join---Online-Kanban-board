@@ -1,15 +1,23 @@
-<div class="board-container">
-    <div class="field-container" *ngFor="let number of [0, 1, 2, 3]; index as i">
-        <h2>{{ boardHeadlines[i]}}</h2>
+<div class="board-container" [ngClass]="{'mobileView': mobileViewPortrait || mobileViewLandscape}">
+    <div class="mobile-bar" *ngIf="mobileViewPortrait || mobileViewLandscape">
+        <div [ngClass]="{'highlightTab': mobileViewPortrait || mobileViewLandscape}" (click)="showThis(0)" id="tab-0">To-do</div>
+        <div [ngClass]="{'border-bottom-left-radius': mobileViewPortrait || mobileViewLandscape}" (click)="showThis(1)" id="tab-1">Progress</div>
+        <div (click)="showThis(2)" id="tab-2">Testing</div>
+        <div (click)="showThis(3)" id="tab-3">Done</div>
+    </div>
+    <div class="field-container" *ngFor="let number of [0, 1, 2, 3]; index as i" id="container-{{ i }}" [ngClass]="{'d-none': (mobileViewPortrait || mobileViewLandscape) ? hideOnFirstLoad(i) : showAllFields()}">
+        <h2 *ngIf="!mobileViewPortrait && !mobileViewLandscape">{{ boardHeadlines[i]}}</h2>
         <div class="board-field" (drop)="dropElement(variables[i], i)" (dragover)="allowDrop($event); highlight(i)"
             (dragleave)="removeHighlight(i)">
+            <div *ngIf="mobileViewPortrait || mobileViewLandscape">{{ filterArray(variables[i]) }}</div>
+
             <mat-card class="boardTask-container" *ngFor="let task of boardTasks | filter:variables[i]; index as j" draggable="true"
                 (dragstart)="startDragging(task)" (click)="openDialogTask(task.customIdName)">
                 <div class="colored-corner" [ngClass]="task.urgency"></div>
                 <mat-card-title>{{ task.title }}</mat-card-title>
                 <mat-card-subtitle>{{ task.category }}</mat-card-subtitle>
                 <mat-card-content>
-                    <span>{{ task.description }}</span>
+                    <!-- <span>{{ task.description }}</span> -->
                     <span class="card-assignment">{{task.assignedTo[0].name}}</span>
                     <span *ngIf="getUserCount(task)" class="card-additional-assignments">{{getUserCount(task)}}</span>
                 </mat-card-content>
@@ -17,7 +25,7 @@
         </div>
     </div>
 
-    <div class="add-confirmation" *ngIf="taskCompleted">
+    <div class="add-confirmation" *ngIf="taskCompleted"  [ngClass]="{'mobile-confirmation': mobileViewPortrait || mobileViewLandscape}">
         <span>Task completed!</span>
         <mat-icon>check_circle</mat-icon>
     </div>

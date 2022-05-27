@@ -10,3 +10,16 @@
     padding-top: 32px;
     background-color: RGB(189, 209, 220);
 }
+
+
+.notice {
+    margin-top: 32px;
+    font-size: 20px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: auto;
+    padding: 16px;
+    border: 2px solid RGB(13, 110, 155);
+}

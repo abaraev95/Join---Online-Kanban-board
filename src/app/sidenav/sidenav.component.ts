@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,9 +10,11 @@ import { Router } from '@angular/router';
 export class SidenavComponent implements OnInit {
 
 
-  constructor(private router: Router) { }
+
+  constructor(private router: Router, public responsive: BreakpointObserver) { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -1,0 +1,32 @@
+.addTask-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: calc(100vw - 200px);
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+    padding-top: 32px;
+
+    background-color: RGB(189, 209, 220);
+
+
+
+    li {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    img {
+        margin-top: 24px;
+        margin-bottom: 40px;
+    }
+
+}
+
+.subheader {
+    margin-top: 24px;
+    font-size: 20px;
+}

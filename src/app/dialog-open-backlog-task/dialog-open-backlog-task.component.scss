@@ -90,7 +90,48 @@ ng-multiselect-dropdown {
     top: 10px !important;
 }
 
+::ng-deep .cdk-overlay-pane {
+    max-width: 90vw !important;
+}
+
 textarea {
     resize: none !important;
     height: 128px !important;
+}
+
+.mobileView {
+    height: 85vh !important;
+    width: 90vw !important;
+
+    mat-form-field {
+        width: 100% !important;
+    }
+
+    textarea {
+        height: 80px !important;
+    }
+
+    .dropdown-list {
+        ul {
+            &:nth-child(1) {
+                height: 48px !important;
+            }
+
+            &:last-child {
+                height: 80px !important;
+            }
+        }
+    }
+
+    ::ng-deep .item1 {
+        height: 48px !important;
+    }
+
+    ::ng-deep .item2 {
+        height: 100px !important;
+    }
+
+    .dropdown-assignment {
+        bottom: 128px;
+    }
 }

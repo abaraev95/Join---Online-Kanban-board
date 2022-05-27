@@ -1,55 +1,50 @@
-<div class="addTask-container">
+<div class="addTask-container" [ngClass]="{'mobile-container': mobileViewPortrait || mobileViewLandscape}">
 
     <h1>Add Task</h1>
     <p>Project Management System</p>
 
     <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
-        <table>
-            <tr>
-                <td>TITLE</td>
-                <td>DUE DATE</td>
-            </tr>
-            <tr>
-                <td> 
+
+        <div class="addTaskForm" [ngClass]="{'pb-64': mobileViewPortrait || mobileViewLandscape}">
+            <div [ngClass]="{'row': !mobileViewPortrait && !mobileViewLandscape, 'column': mobileViewPortrait || mobileViewLandscape}">
+                <div class="ml-32 mr-16 form-column" [ngClass]="{'full-width': !mobileViewPortrait && !mobileViewLandscape, 'mr-32': mobileViewPortrait || mobileViewLandscape}">
+                    <label>TITLE</label>
                     <mat-form-field appearance="outline" [hideRequiredMarker]="hideRequiredControl.value"
-                        [floatLabel]="floatLabelControl.value">
+                        [floatLabel]="floatLabelControl.value" #title>
                         <input matInput placeholder="Enter a title" formControlName="title" required>
                         <mat-error *ngIf="this.taskForm.controls['title'].hasError('required')">Please enter a Title
                         </mat-error>
-
                     </mat-form-field>
-                </td>
-
-                <td>
+                </div>
+                <div class="mr-32 ml-16 form-column" [ngClass]="{'full-width': !mobileViewPortrait && !mobileViewLandscape, 'ml-32': mobileViewPortrait || mobileViewLandscape}">
+                    <label>DUE DATE</label>
                     <mat-form-field appearance="outline" [hideRequiredMarker]="hideRequiredControl.value"
                         [floatLabel]="floatLabelControl.value">
-                        <input matInput placeholder="MM/DD/YYYY" [min]="today" [matDatepicker]="picker" formControlName="dueDate" required>
+                        <input matInput placeholder="MM/DD/YYYY" [min]="today" [matDatepicker]="picker"
+                            formControlName="dueDate" required>
                         <mat-datepicker-toggle class="date-icon" matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
-                        <mat-error
-                            *ngIf="this.taskForm.controls['dueDate'].hasError('required')">
+                        <mat-error *ngIf="this.taskForm.controls['dueDate'].hasError('required')">
                             Please enter a date</mat-error>
                     </mat-form-field>
-                </td>
-            </tr>
-            <tr>
-                <td>CATEGORY</td>
-                <td>URGENCY</td>
-            </tr>
-            <tr>
-                <td>
+                </div>
+            </div>
+            <div [ngClass]="{'row': !mobileViewPortrait && !mobileViewLandscape, 'column': mobileViewPortrait || mobileViewLandscape}">
+                <div class="ml-32 mr-16 form-column" [ngClass]="{'full-width': !mobileViewPortrait && !mobileViewLandscape, 'mr-32': mobileViewPortrait || mobileViewLandscape}">
+                    <label>CATEGORY</label>
                     <mat-form-field appearance="outline">
                         <mat-select formControlName="category" required placeholder="Choose...">
+                            <mat-option value="Frontend">Frontend</mat-option>
+                            <mat-option value="Backend">Backend</mat-option>
                             <mat-option value="Management">Management</mat-option>
-                            <mat-option value="Purchasing">Purchasing</mat-option>
-                            <mat-option value="Controlling">Controlling</mat-option>
-                            <mat-option value="R&D">R&D</mat-option>
+                            <mat-option value="Sales">Sales</mat-option>
                         </mat-select>
                         <mat-error *ngIf="taskForm.controls['category'].hasError('required')">Please choose a category
                         </mat-error>
                     </mat-form-field>
-                </td>
-                <td>
+                </div>
+                <div class="mr-32 ml-16 form-column" [ngClass]="{'full-width': !mobileViewPortrait && !mobileViewLandscape, 'ml-32': mobileViewPortrait || mobileViewLandscape}">
+                    <label>URGENCY</label>
                     <mat-form-field appearance="outline">
                         <mat-select formControlName="urgency" required placeholder="Choose...">
                             <mat-option value="Low">Low</mat-option>
@@ -60,25 +55,20 @@
                         <mat-error *ngIf="taskForm.controls['urgency'].hasError('required')">Please choose an urgency
                         </mat-error>
                     </mat-form-field>
-                </td>
-            </tr>
-            <tr>
-                <td>DESCRIPTION</td>
-                <td>ASSIGNED TO</td>
-            </tr>
-            <tr>
-                <td>
+                </div>
+            </div>
+            <div [ngClass]="{'row': !mobileViewPortrait && !mobileViewLandscape, 'column': mobileViewPortrait || mobileViewLandscape}">
+                <div class="ml-32 mr-16 form-column" [ngClass]="{'full-width': !mobileViewPortrait && !mobileViewLandscape, 'mr-32': mobileViewPortrait || mobileViewLandscape}">
+                    <label>DESCRIPTION</label>
                     <mat-form-field appearance="outline">
-                        <textarea matInput formControlName="description" required placeholder="Describe your task ..."></textarea>
+                        <textarea matInput formControlName="description" required
+                            placeholder="Describe your task ..."></textarea>
                         <mat-error *ngIf="taskForm.controls['description'].hasError('required')">Please describe the
                             task</mat-error>
                     </mat-form-field>
-
-                </td>
-                <td class="row align-items-start">
-                    <!-- <div class="addUser-btn" (click)="addUser()">
-                        <img src="./assets/img/icon-plus.png">
-                    </div> -->
+                </div>
+                <div class="mr-32 ml-16 form-column overflow-x" [ngClass]="{'full-width': !mobileViewPortrait && !mobileViewLandscape, 'ml-32': mobileViewPortrait || mobileViewLandscape}">
+                    <label>ASSIGNED TO</label>
                     <div class="assignedTo-container">
                         <div class="container-checkbox" *ngFor="let employee of employees; index as i">
                             <input type="checkbox" [id]="'myCheckbox-' + i" formArrayName="assignedTo"
@@ -89,16 +79,17 @@
                             </label>
                         </div>
                     </div>
-                </td>
-            </tr>
-        </table>
-        <div class="btn-container">
-            <button mat-button type="button" (click)="resetForm()">CLEAR</button>
-            <input type="submit" value="CREATE TASK" [disabled]="taskForm.invalid">
+                </div>
+            </div>
+            <div class="btn-container">
+                <button mat-button type="button" (click)="resetForm()">CLEAR</button>
+                <input type="submit" value="CREATE TASK" [disabled]="taskForm.invalid">
+            </div>
         </div>
+
     </form>
 
-    <div class="add-confirmation" *ngIf="taskAdded">
+    <div class="add-confirmation" *ngIf="taskAdded"  [ngClass]="{'mobile-confirmation': mobileViewPortrait || mobileViewLandscape}">
         <span>Task added</span>
         <mat-icon>check_circle</mat-icon>
     </div>
