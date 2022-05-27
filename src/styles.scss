@@ -8,6 +8,7 @@ body {
     height: 100vh;
     width: 100vw;
     position: relative;
+    background-color: RGB(189, 209, 220);
 }
 
 .desktop-view {
@@ -90,6 +91,10 @@ p {
     position: absolute !important;
     top: calc(50% - 100px);
     left: calc(50% + 50px);
+}
+
+.mobile-loading {
+    left: calc(50% - 50px) !important;
 }
 
 .d-none {

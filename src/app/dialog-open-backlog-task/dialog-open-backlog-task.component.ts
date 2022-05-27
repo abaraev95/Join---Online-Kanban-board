@@ -56,7 +56,6 @@ export class DialogOpenBacklogTaskComponent implements OnInit {
         }
 
       })
-    console.log(this.allTasks);
 
     // this.dropdownList = [
     //   { item_id: 1, item_text: 'Mumbai' },

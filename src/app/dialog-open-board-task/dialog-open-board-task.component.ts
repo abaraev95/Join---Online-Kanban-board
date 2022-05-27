@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { GlobalVariablesService } from '../shared/global/global-variables.service';
 import { formatDate } from '@angular/common'
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-dialog-open-board-task',
@@ -13,14 +14,36 @@ export class DialogOpenBoardTaskComponent implements OnInit {
 
   showTask: any = {};
   id!: string;
+  
+  mobileViewPortrait! :boolean;
+  mobileViewLandscape! :boolean;
 
   constructor(
     public dialogRef: MatDialogRef<DialogOpenBoardTaskComponent>, 
     private firestore: AngularFirestore, 
     public globalV: GlobalVariablesService,
+    public responsive: BreakpointObserver
     ) { }
 
   ngOnInit(): void {
+
+    this.responsive.observe([
+      Breakpoints.HandsetPortrait, 
+      Breakpoints.HandsetLandscape])
+      .subscribe(result => {
+        this.mobileViewPortrait= false;
+        this.mobileViewLandscape= false;
+
+        const breakpoints = result.breakpoints;
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.mobileViewPortrait= true;
+        }
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.mobileViewLandscape= true;
+        }
+
+      })
   }
 
   countdown() {

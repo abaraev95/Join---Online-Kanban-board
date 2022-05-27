@@ -126,14 +126,22 @@ mat-card-content {
     display: flex;
     justify-content: center;
 
-    span {
-        &:first-child {
-            display: table-cell;
-            max-width:150px;
-            white-space: nowrap;
-            text-overflow:ellipsis;
-            overflow: hidden;
-        }
+    // span {
+    //     &:first-child {
+    //         display: table-cell;
+    //         max-width:150px;
+    //         white-space: nowrap;
+    //         text-overflow:ellipsis;
+    //         overflow: hidden;
+    //     }
+    // }
+
+    img {
+        height: 25px;
+        width: 25px;
+        object-fit: cover;
+        border-radius: 100%;
+        border: 1px solid black;
     }
 
 }
@@ -147,7 +155,6 @@ mat-card-content {
     bottom: 4px;
     left: 8px;
     font-weight: 500;
-
 }
 
 .card-additional-assignments {

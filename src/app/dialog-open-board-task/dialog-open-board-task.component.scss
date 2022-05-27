@@ -48,7 +48,8 @@
 
 ::ng-deep .view-board-task-class .mat-dialog-content {
     padding: 12px 24px !important;
-    overflow: unset !important;
+    overflow-x: unset !important;
+    overflow-y: auto !important;
     margin: unset !important;
 }
 
@@ -92,7 +93,7 @@
     border-radius: 4px;
     padding: 8px;
     position: relative;
-    height: 40px;
+    height: auto;
     display: flex;
     align-items: center;
     margin-bottom: 24px;
@@ -184,4 +185,51 @@
     position: absolute;
     right: 0;
     bottom: 0;
+}
+
+::ng-deep .cdk-overlay-pane {
+    max-width: 90vw !important;
+}
+
+
+.mobileView {
+    width: 90vw !important;
+
+    // mat-form-field {
+    //     width: 100% !important;
+    // }
+
+    .all-assignments {
+        width: unset !important;
+        margin-bottom: 24px;
+    }
+
+    .border3 {
+        margin-left: unset !important;
+        margin-right: unset !important;
+    }
+
+    .all-assignments2 {
+        width: unset !important;
+        margin-bottom: 24px;
+    }
+
+    .show-text {
+        margin-left: 96px;
+        font-size: 20px;
+        word-wrap: break-word;
+        width: 156px;
+    }
+
+}
+
+.mobileContent {
+    padding-top: 64px !important;
+}
+
+@media (max-width: 600px) {
+    ::ng-deep .view-board-task-class mat-dialog-container {
+
+        height: 85vh !important;
+    }
 }
