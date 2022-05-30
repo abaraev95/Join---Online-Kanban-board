@@ -58,8 +58,10 @@
     flex-direction: column;
     margin-left: 8px;
     margin-right: 8px;
-    width: 100%;
     text-align: center;
+    max-width: 25%;
+    width: 100%;
+
 
     h2 {
         font-size: 16px;
@@ -193,6 +195,11 @@ mat-card-content {
 
     .board-field {
         height: 75vh !important;
+    }
+
+    .field-container {
+        max-width: 100% !important;
+        width: 100% !important;
     }
 }
 

@@ -48,14 +48,18 @@
 
 ::ng-deep .view-board-task-class .mat-dialog-content {
     padding: 12px 24px !important;
-    overflow-x: unset !important;
-    overflow-y: auto !important;
+    overflow: unset!important;
     margin: unset !important;
 }
 
-::ng-deep .view-board-task-class .mat-dialog-actions {
+
+
+.action-btn {
     justify-content: center !important;
     position: relative !important;
+    height: 40px !important;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -107,8 +111,7 @@
     height: 160px;
     display: flex;
     margin-bottom: 24px;
-    overflow-y:auto;
-
+    overflow-y: auto;
 }
 
 .border3 {
@@ -191,7 +194,6 @@
     max-width: 90vw !important;
 }
 
-
 .mobileView {
     width: 90vw !important;
 
@@ -221,15 +223,57 @@
         width: 156px;
     }
 
+    .all-assignments2 {
+        span {
+            font-size: 24px;
+
+            &:last-child {
+                font-size: 15px !important;
+            }
+        }
+    }
 }
 
 .mobileContent {
     padding-top: 64px !important;
+    position: relative;
+}
+
+.mobile-btn-position {
+    position: absolute;
+    top: 16px;
+    left: 0;
+    right: 0;
+    font-size: 16px !important;
+}
+
+.btn-left {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn-right {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {
-    ::ng-deep .view-board-task-class mat-dialog-container {
 
+    ::ng-deep .view-board-task-class mat-dialog-container {
         height: 85vh !important;
+    }
+
+    ::ng-deep .view-board-task-class .mat-dialog-content {
+        overflow-x: unset !important;
+        overflow-y: auto !important;
+        margin: unset !important;
     }
 }

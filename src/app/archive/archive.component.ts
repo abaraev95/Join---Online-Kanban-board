@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,10 +13,29 @@ export class ArchiveComponent implements OnInit {
 
   archive: any[] = [];
   tasksAvailable = true;
+  mobileViewPortrait! :boolean;
+  mobileViewLandscape! :boolean;
 
-  constructor(private firestore: AngularFirestore, public dialog: MatDialog) { }
+  constructor(private firestore: AngularFirestore, public dialog: MatDialog, public responsive: BreakpointObserver) { }
 
   ngOnInit(): void {
+
+    this.responsive.observe([
+      Breakpoints.HandsetPortrait, 
+      Breakpoints.HandsetLandscape])
+      .subscribe(result => {
+        this.mobileViewPortrait= false;
+        this.mobileViewLandscape= false;
+        const breakpoints = result.breakpoints;
+
+        if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.mobileViewPortrait= true;
+        }
+        else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.mobileViewLandscape= true;
+        }
+
+      })
     this.firestore
       .collection('archive')
       .valueChanges({ idField: 'customIdName' })

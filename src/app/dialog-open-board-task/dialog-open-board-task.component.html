@@ -1,4 +1,4 @@
-<div  [ngClass]="{'mobileView': mobileViewPortrait || mobileViewLandscape}">
+<div [ngClass]="{'mobileView': mobileViewPortrait || mobileViewLandscape}">
   <div class="headline-highlight">
     <h1 mat-dialog-title>Details</h1>
     <button class="close-btn" mat-button (click)="dialogRef.close()">
@@ -6,6 +6,24 @@
     </button>
   </div>
   <div mat-dialog-content [ngClass]="{'mobileContent': mobileViewPortrait || mobileViewLandscape}">
+    <div class="mobile-btn-position" *ngIf="mobileViewPortrait || mobileViewLandscape">
+      <div class="btn-left" (click)="moveToLeft(showTask.location)" *ngIf="showTask.location != 'To-do'">
+        <mat-icon>
+          keyboard_double_arrow_left
+        </mat-icon>
+        <div>
+          {{ showDestinationLeft(showTask.location) }}
+        </div>
+      </div>
+      <div class="btn-right" (click)="moveToRight(showTask.location)" *ngIf="showTask.location != 'Done'">
+        <div>
+          {{ showDestinationRight(showTask.location) }}
+        </div>
+        <mat-icon>
+          keyboard_double_arrow_right
+        </mat-icon>
+      </div>
+    </div>
     <div class="border">
       <span class="headlines">Title:</span>
       <span class="show-text">{{showTask.title}}</span>
@@ -14,7 +32,8 @@
       <span class="headlines">Description:</span>
       <span class="show-text">{{showTask.description}}</span>
     </div>
-    <div [ngClass]="{'row': !mobileViewPortrait && !mobileViewLandscape, 'column': mobileViewPortrait || mobileViewLandscape}">
+    <div
+      [ngClass]="{'row': !mobileViewPortrait && !mobileViewLandscape, 'column': mobileViewPortrait || mobileViewLandscape}">
       <div class="all-assignments">
         <span class="headlines">Assigned to:</span>
         <div class="overflow">
@@ -45,16 +64,25 @@
         <span>{{ formatDate(showTask.dueDate) }}</span>
       </div>
     </div>
+    <div class="action-btn">
+      <button *ngIf="showTask.location == 'To-do'" mat-button (click)="moveToBacklog()">Move to
+        Backlog</button>
+      <button *ngIf="showTask.location == 'Done'" mat-button (click)="taskFinished()">Task
+        finished</button>
+      <button mat-button matTooltip="Delete this task" class="delete-btn" (click)="moveToTrash()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </div>
-  <div mat-dialog-actions>
+  <!-- <div mat-dialog-actions>
     <button *ngIf="showTask.location == 'To-do'" mat-button cdkFocusInitial (click)="moveToBacklog()">Move to
       Backlog</button>
-    <!-- <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="deleteFromBacklog()" cdkFocusInitial>Yes</button> -->
+     <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="deleteFromBacklog()" cdkFocusInitial>Yes</button> 
     <button *ngIf="showTask.location == 'Done'" mat-button cdkFocusInitial (click)="taskFinished()">Task
       finished</button>
     <button mat-button matTooltip="Delete this task" class="delete-btn" (click)="moveToTrash()">
       <mat-icon>delete</mat-icon>
     </button>
-  </div>
+  </div> -->
 </div>

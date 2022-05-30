@@ -116,5 +116,69 @@ export class DialogOpenBoardTaskComponent implements OnInit {
     })
   }
 
+  moveToRight(position: string) {
+    if(position == 'To-do'){
+      this.showTask.location = 'Progress';
+    }
+    if(position == 'Progress'){
+      this.showTask.location = 'Testing';
+    }
+    if(position == 'Testing'){
+      this.showTask.location = 'Done';
+    }
+    this.updateTask();
+  }
+
+  moveToLeft(position: string) {
+
+    if(position == 'Progress'){
+      this.showTask.location = 'To-do';
+    }
+    if(position == 'Testing'){
+      this.showTask.location = 'Progress';
+    }
+    if(position == 'Done'){
+      this.showTask.location = 'Testing';
+    }
+    this.updateTask();
+  }
+
+  updateTask() {
+    this.firestore
+      .collection('boardTasks')
+      .doc(this.showTask.customIdName)
+      .update(JSON.parse(JSON.stringify(this.showTask)))
+      .then(() => {
+        this.dialogRef.close();
+      })
+  }
+
+  showDestinationLeft(position: string) {
+
+    if(position == 'Progress'){
+      return 'To-do';
+    }
+    if(position == 'Testing'){
+      return 'Progress';
+    }
+    if(position == 'Done'){
+      return 'Testing';
+    }
+    return false;
+  }
+
+  showDestinationRight(position: string) {
+
+    if(position == 'To-do'){
+      return 'Progress';
+    }
+    if(position == 'Progress'){
+      return 'Testing';
+    }
+    if(position == 'Testing'){
+      return 'Done';
+    }
+    return false;
+  }
 
 }
